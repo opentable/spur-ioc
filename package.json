@@ -1,8 +1,15 @@
 {
   "name": "spur-di",
-  "description": "dependency injection framework",
+  "description": "Dependency Injection Framework for Node.js",
   "version": "0.0.1",
   "author": "Siavash Etemadieh <ssetem@googlemail.com>",
+  "keywords": [
+    "di",
+    "IoC",
+    "dependency injection",
+    "inversion of control",
+    "framwork"
+  ],
   "license": "MIT",
   "scripts": {
     "test": "mocha --opts ./test/mocha.opts ./test/"
