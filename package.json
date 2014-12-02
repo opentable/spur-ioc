@@ -1,0 +1,20 @@
+{
+  "name": "spur",
+  "description": "dependency injection framework",
+  "version": "0.0.1",
+  "author": "Siavash Etemadieh <ssetem@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "1.8.0",
+    "lodash": "2.4.1",
+    "stack-filter": "^1.0.0",
+    "require-all": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
+}
