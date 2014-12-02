@@ -2,7 +2,8 @@
 
 Dependency Injection Framework for [Node.js](http://nodejs.org/)
 
-[![Build Status](https://travis-ci.org/SpurFramework/spur-ci.png?branch=master)](https://travis-ci.org/SpurFramework/spur-ci) [![NPM version](https://badge.fury.io/js/spur-ci.png)](http://badge.fury.io/js/spur-ci) ![Dependencies](https://david-dm.org/SpurFramework/spur-ci.png)
+[![NPM version](https://badge.fury.io/js/spur-di.png)](http://badge.fury.io/js/spur-di)
+[![Build Status](https://travis-ci.org/SpurFramework/spur-di.png?branch=master)](https://travis-ci.org/SpurFramework/spur-di)
 
 ### Installation
 
