@@ -1,9 +1,20 @@
 {
-  "name": "spur",
+  "name": "spur-di",
   "description": "dependency injection framework",
   "version": "0.0.1",
   "author": "Siavash Etemadieh <ssetem@googlemail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha --opts ./test/mocha.opts ./test/"
+  },
+  "bugs": {
+    "url": "https://github.com/SpurFramework/spur-ci/issues"
+  },
+  "homepage": "https://github.com/SpurFramework/spur-ci",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SpurFramework/spur-ci.git"
+  },
   "dependencies": {
     "coffee-script": "1.8.0",
     "lodash": "2.4.1",
