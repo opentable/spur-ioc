@@ -30,8 +30,7 @@ describe "injector - Container Management", ->
     @injector.addResolvableDependency "exception", ()-> throw new Error("Oh no")
     #cyclic
     @injector.addResolvableDependency "cyclic", (error)->
-    @injector.addResolvableDependency "missing", (nothing)->
-
+    @injector.addResolvableDependency "missing", (nothing, $injector)->
     @injector.addDependency "punct", "!"
     @injector.addDependency "_", require("lodash")
     expect(=>

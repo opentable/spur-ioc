@@ -16,7 +16,7 @@ class Dependency
     dep
 
   @dependency:(name, instance)->
-    dep = new Dependency()
+    dep = new Dependency(name)
     dep.instance = instance
     dep
 

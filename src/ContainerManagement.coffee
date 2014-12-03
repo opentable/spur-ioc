@@ -11,16 +11,16 @@ class ContainerManagement
     if @hasDependency(name)
       @logger.warn "warning: #{name} dependency is being overwritten in #{@name} injector"
 
-  addResolvableDependency:(name, dependency)->
-    @warnIfNeeded(name)
+  addResolvableDependency:(name, dependency, suppressWarning = false)->
+    @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = Dependency.resolvableDependency(name, dependency)
 
-  addDependency:(name, dependency)->
-    @warnIfNeeded(name)
+  addDependency:(name, dependency, suppressWarning = false)->
+    @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = Dependency.dependency(name, dependency)
 
-  addConstructedDependency:(name, dependency)->
-    @warnIfNeeded(name)
+  addConstructedDependency:(name, dependency, suppressWarning = false)->
+    @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = dependency
 
   removeDependency:(name)->

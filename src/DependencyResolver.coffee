@@ -1,4 +1,5 @@
 CallChain   = require "./CallChain"
+Dependency   = require "./Dependency"
 _           = require "lodash"
 stackFilter = require "stack-filter"
 
@@ -16,7 +17,7 @@ class DependencyError
     new DependencyError(callChain, "Exception in Dependency", exception)
 
   print:(logger)->
-    logger.error @error + " #{@callChain.getHighlightedName()} in ", @callChain.getPath()
+    logger.error @error + " #{@callChain.getHighlightedName()} in ", @callChain.getPath(true)
     logger.error @errorObject if @errorObject
     logger.error @errorObject.stack if @errorObject
 
@@ -25,17 +26,42 @@ class DependencyResolver
   constructor:(@container, @name, @logger)->
     @errors = []
     @stackFilter = stackFilter.configure({
-      filters:["DependencyResolver.resolveDependencies"]
+      filters:["DependencyResolver."]
     })
 
   @resolve:(container, name, logger)->
-    new DependencyResolver(container, name, logger).resolve()
+    resolver = new DependencyResolver(container, name, logger)
+    resolver.resolve()
+    resolver
 
 
-  resolveDependencies:(name, callChain)=>
-    callChain =
-      if callChain
-        callChain.add(name)
+  resolveArray:(deps)->
+    instances = []
+    for depName in deps
+      instances.push @resolveDependencies(depName)
+    instances
+
+  resolveMap:(deps)->
+    instances = {}
+    for depName in deps
+      instances[depName] = @resolveDependencies(depName)
+    instances
+
+  resolveRegex:(regex)=>
+    deps = _.keys(@container.dependencies).filter (key)=>
+      regex.test(key) and key not in ["$injector", @container.privateInjectorName()]
+    @resolveMap(deps)
+
+  addInjectorDependency:()->
+    @container.addDependency("$injector", {
+      get:@resolveDependencies
+      getRegex:@resolveRegex
+    }, true)
+
+  resolveDependencies:(name)=>
+    @callChain =
+      if @callChain
+        @callChain.add(name)
       else
         CallChain.create(name)
 
@@ -44,20 +70,19 @@ class DependencyResolver
       if dep.instance
         return dep.instance
       else
-        if callChain.hasCyclic()
-          @errors.push DependencyError.cyclic(callChain)
+        if @callChain.hasCyclic()
+          @errors.push DependencyError.cyclic(@callChain)
         else
-          instances = []
-          for depName in dep.dependencies
-            instances.push @resolveDependencies(depName, callChain)
+          instances = @resolveArray(dep.dependencies)
           try
             dep.instance = dep.fn.apply null, instances
           catch e
             @cleanStack(e)
-            @errors.push(DependencyError.exception(callChain, e))
+            @errors.push(DependencyError.exception(@callChain, e))
           dep.instance
     else
-      @errors.push DependencyError.missingDependency(callChain)
+      @errors.push DependencyError.missingDependency(@callChain)
+      return null
 
   cleanStack:(e)->
     e.stack =
@@ -67,12 +92,15 @@ class DependencyResolver
     for e in @errors
       e.print(@logger)
 
+  throwError:()->
+    throw new Error("Resolver encountered errors")
+
   resolve:()->
+    @addInjectorDependency()
     @dependency = @resolveDependencies(@name)
     if @errors.length > 0
       @printErrors()
-      throw new Error("Resolver encountered errors")
-
+      @throwError()
     @dependency
 
 module.exports = DependencyResolver
