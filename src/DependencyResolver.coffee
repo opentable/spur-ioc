@@ -25,6 +25,7 @@ class DependencyResolver
 
   constructor:(@container, @name, @logger)->
     @errors = []
+    @resolvingFinished = false
     @stackFilter = stackFilter.configure({
       filters:["DependencyResolver."]
     })
@@ -53,10 +54,20 @@ class DependencyResolver
     @resolveMap(deps)
 
   addInjectorDependency:()->
-    @container.addDependency("$injector", {
-      get:@resolveDependencies
-      getRegex:@resolveRegex
-    }, true)
+    @$injector = @container.addDependency("$injector", {
+      get:(name)=>
+        @checkResolvingFinished(
+          "cannot use $injector.get('#{name}') asynchronously")
+        @resolveDependencies(name)
+      getRegex:(regex)=>
+        @checkResolvingFinished(
+          "cannot use $injector.getRegex(#{regex}) asynchronously")
+        @resolveRegex(regex)
+    }, true).instance
+
+  checkResolvingFinished:(message)->
+    if @resolvingFinished
+      throw new Error(message)
 
   resolveDependencies:(name)=>
     @callChain =
@@ -101,6 +112,8 @@ class DependencyResolver
     if @errors.length > 0
       @printErrors()
       @throwError()
+    @resolvingFinished = true
     @dependency
+
 
 module.exports = DependencyResolver

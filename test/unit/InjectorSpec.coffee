@@ -64,18 +64,31 @@ describe "Injector", ->
 
 
   it "registeration methods", ->
-    @injector1.registerLibraries({
+    @injector.registerLibraries({
       "_":"lodash"
       "chai":"chai"
     })
 
-    @injector1.inject (_, chai)->
+    @injector.inject (_, chai)->
       expect(_.groupBy).to.exist()
       expect(chai.Assertion).to.exist()
 
+  it "dont allow async use of $injector", (done)->
 
-      # console.log @container
-    # expect(@container.inject (a,b,c)->)
-    #   .to.deep.equal ['a','b','c']
+    @injector.registerLibraries({
+      "_":"lodash"
+      "chai":"chai"
+    })
 
+    @injector.addResolvableDependency "foo", ($injector)->
+      setTimeout ->
+        expect(->
+          $injector.get("chai")
+        ).to.throw("cannot use $injector.get('chai') asynchronously")
+        expect(->
+          $injector.getRegex(/.+/)
+        ).to.throw("cannot use $injector.getRegex(/.+/) asynchronously")
+        done()
+      ,0
 
+    @injector.inject (_, chai, $injector, foo)->
