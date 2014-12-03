@@ -17,7 +17,8 @@ class DependencyError
 
   print:(logger)->
     logger.error @error + " #{@callChain.getHighlightedName()} in ", @callChain.getPath()
-    logger.fatal @errorObject.stack if @errorObject
+    logger.error @errorObject if @errorObject
+    logger.error @errorObject.stack if @errorObject
 
 class DependencyResolver
 

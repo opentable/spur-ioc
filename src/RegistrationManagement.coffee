@@ -26,8 +26,8 @@ class RegistrationManagement
       @registerFolder(rootDir, dir)
 
   registerLibraries:(libraries)->
-    for depName,libName of dependencies
-      @addDependency(libName,require(v))
+    for depName,libName of libraries
+      @addDependency(depName,require(libName))
 
   registerDependencies:(dependencies)->
     for k,v of dependencies
