@@ -1,7 +1,7 @@
 {
   "name": "spur-ioc",
   "description": "Dependency Injection Framework for Node.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Siavash Etemadieh <ssetem@googlemail.com>",
   "keywords": [
     "IoC",
