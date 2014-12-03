@@ -7,8 +7,9 @@
     "IoC",
     "di",
     "inversion of control",
+    "dependency",
     "dependency injection",
-    "framework"
+    "container"
   ],
   "license": "MIT",
   "scripts": {
