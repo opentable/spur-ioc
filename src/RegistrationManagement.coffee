@@ -13,6 +13,7 @@ class RegistrationManagement
       filter      :  /(.+)\.(js|json|coffee)$/
     })
     @registerLibMap(libs)
+    @
 
   registerLibMap:(libs)->
     for k, v of libs
@@ -20,17 +21,21 @@ class RegistrationManagement
         @addResolvableDependency(k,v)
       else if _.isObject(v)
         @registerLibMap(v)
+    @
 
   registerFolders:(rootDir, dirs)->
     _.each dirs, (dir)=>
       @registerFolder(rootDir, dir)
+    @
 
   registerLibraries:(libraries)->
     for depName,libName of libraries
       @addDependency(depName,require(libName))
+    @
 
   registerDependencies:(dependencies)->
     for k,v of dependencies
       @addDependency(k,v)
+    @
 
 module.exports = RegistrationManagement

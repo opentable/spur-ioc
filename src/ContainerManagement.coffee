@@ -14,17 +14,21 @@ class ContainerManagement
   addResolvableDependency:(name, dependency, suppressWarning = false)->
     @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = Dependency.resolvableDependency(name, dependency)
+    @
 
   addDependency:(name, dependency, suppressWarning = false)->
     @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = Dependency.dependency(name, dependency)
+    @
 
   addConstructedDependency:(name, dependency, suppressWarning = false)->
     @warnIfNeeded(name) unless suppressWarning
     @dependencies[name] = dependency
+    @
 
   removeDependency:(name)->
     delete @dependencies[name]
+    @
 
   getDependency:(name)->
     @dependencies[name]
@@ -35,7 +39,7 @@ class ContainerManagement
   use:(otherInjector)->
     for k, v of otherInjector.dependencies
       @addConstructedDependency(k,v)
-
+    @
 
 
 module.exports = ContainerManagement

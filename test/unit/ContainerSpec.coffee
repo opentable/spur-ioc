@@ -23,8 +23,9 @@ describe "injector - Container Management", ->
       bar + " world" + punct + _.VERSION
     @injector.addResolvableDependency "bar", (error)-> "hi"
     @injector.addResolvableDependency "error", (error1)->
-    @injector.addResolvableDependency "error1", (error2)->
-    @injector.addResolvableDependency "error2", (error3)->
+    @injector.addResolvableDependency("error1", (error2)->)
+      .addResolvableDependency "error2", (error3)->
+
     @injector.addResolvableDependency "error3", (exception, cyclic, missing)->
     #exception
     @injector.addResolvableDependency "exception", ()-> throw new Error("Oh no")

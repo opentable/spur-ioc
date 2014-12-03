@@ -32,14 +32,15 @@ describe "Injector", ->
       a:"a_updated"
       c:"c"
     })
-    @injector1.use(@injector2)
-    @injector1.inject (a,b,c, $injector)->
-      expect([a,b,c]).to.deep.equal [
-        "a_updated", "b", "c"
-      ]
-      expect($injector.getRegex(/./)).to.deep.equal {
-        a: 'a_updated', b: 'b', c: 'c'
-      }
+    @injector1
+      .use(@injector2)
+      .inject (a,b,c, $injector)->
+        expect([a,b,c]).to.deep.equal [
+          "a_updated", "b", "c"
+        ]
+        expect($injector.getRegex(/./)).to.deep.equal {
+          a: 'a_updated', b: 'b', c: 'c'
+        }
 
     @injector1.inject (a,b,c, $injector)->
       expect([a,b,c]).to.deep.equal [
@@ -67,9 +68,7 @@ describe "Injector", ->
     @injector.registerLibraries({
       "_":"lodash"
       "chai":"chai"
-    })
-
-    @injector.inject (_, chai)->
+    }).inject (_, chai)->
       expect(_.groupBy).to.exist()
       expect(chai.Assertion).to.exist()
 
