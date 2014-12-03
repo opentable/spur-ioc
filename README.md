@@ -1,14 +1,14 @@
-# spur-di (WIP)
+# Spur: IoC (WIP)
 
 Dependency Injection Framework for [Node.js](http://nodejs.org/)
 
-[![NPM version](https://badge.fury.io/js/spur-di.png)](http://badge.fury.io/js/spur-di)
-[![Build Status](https://travis-ci.org/SpurFramework/spur-di.png?branch=master)](https://travis-ci.org/SpurFramework/spur-di)
+[![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
+[![Build Status](https://travis-ci.org/SpurFramework/spur-ioc.png?branch=master)](https://travis-ci.org/SpurFramework/spur-ioc)
 
 ### Installation
 
 ```bash
-$ npm install --save spur-di
+$ npm install --save spur-ioc
 ```
 
 ## Features

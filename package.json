@@ -1,26 +1,26 @@
 {
-  "name": "spur-di",
+  "name": "spur-ioc",
   "description": "Dependency Injection Framework for Node.js",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "author": "Siavash Etemadieh <ssetem@googlemail.com>",
   "keywords": [
-    "di",
     "IoC",
-    "dependency injection",
+    "di",
     "inversion of control",
-    "framwork"
+    "dependency injection",
+    "framework"
   ],
   "license": "MIT",
   "scripts": {
     "test": "mocha --opts ./test/mocha.opts ./test/"
   },
   "bugs": {
-    "url": "https://github.com/SpurFramework/spur-di/issues"
+    "url": "https://github.com/SpurFramework/spur-ioc/issues"
   },
-  "homepage": "https://github.com/SpurFramework/spur-di",
+  "homepage": "https://github.com/SpurFramework/spur-ioc",
   "repository": {
     "type": "git",
-    "url": "git://github.com/SpurFramework/spur-di.git"
+    "url": "git://github.com/SpurFramework/spur-ioc.git"
   },
   "dependencies": {
     "coffee-script": "1.8.0",
