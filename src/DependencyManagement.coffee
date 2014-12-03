@@ -9,8 +9,10 @@ class DependencyManagement
     "$$"+@name
 
   inject:(fn)->
-    @addResolvableDependency(@privateInjectorName(), fn)
-    @resolveDependency(@privateInjectorName())
+    name = @privateInjectorName()
+    @addResolvableDependency(name, fn)
+    @resolveDependency(name)
+    @removeDependency(name)
 
 
 module.exports = DependencyManagement

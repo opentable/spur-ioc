@@ -23,6 +23,9 @@ class ContainerManagement
     @warnIfNeeded(name)
     @dependencies[name] = dependency
 
+  removeDependency:(name)->
+    delete @dependencies[name]
+
   getDependency:(name)->
     @dependencies[name]
 
