@@ -13,6 +13,17 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 
 - [Features](#features)
 - [Quick start](#quick-start)
+- [API Reference](API.md)
+- [Examples](#examples)
+    - [Coffee-Script: Express.js Web Server](#coffee-script-expressjs-web-server)
+    - [JavaScript: Express.js Web Server](#javascript-expressjs-web-server)
+- [What is dependency injection and inversion of control?](#what-is-dependency-injection-and-inversion-of-control)
+- [Development](#development)
+    - [Testing](#testing)
+    - [Styleguide](#styleguide)
+- [License](#license)
+- [Changelog](#changelog)
+- [Contributing](#contributing)
 
 #Features
 
@@ -22,14 +33,35 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 
 #Quick start
 
-Install
-
 ```bash
 $ npm install spur-ioc
 ```
 
+Then:
 
-## Tests
+```javascript
+
+```
+
+#Examples
+
+##Coffee-Script: Express.js Web Server
+
+...
+
+##JavaScript: Express.js Web Server
+
+...
+
+#What is dependency injection and inversion of control?
+
+...
+
+#Development
+
+...
+
+##Testing
 
 To run the test suite, first install the dependancies, then run `npm test`:
 
@@ -38,10 +70,18 @@ $ npm install
 $ npm test
 ```
 
-## Examples
+##Styleguide
 
-  * ...
+...
 
-### License
+#License
 
 [MIT](LICENSE)
+
+#Changelog
+
+  * Initial commit
+
+#Contributing
+
+...
