@@ -17,7 +17,7 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 - [Examples](#examples)
     - [Coffee-Script: Express.js Web Server](#coffee-script-expressjs-web-server)
     - [JavaScript: Express.js Web Server](#javascript-expressjs-web-server)
-- [What is dependency injection and inversion of control?](#what-is-dependency-injection-and-inversion-of-control)
+- [What is inversion of control and why you should use it?](#what-is-inversion-of-control-and-why-you-should-use-it)
 - [Development](#development)
     - [Testing](#testing)
     - [Styleguide](#styleguide)
@@ -53,9 +53,13 @@ Then:
 
 ...
 
-#What is dependency injection and inversion of control?
+#What is inversion of control and why you should use it?
 
-...
+Inversion of Control (IoC) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory.
+
+
+
+
 
 #Development
 
