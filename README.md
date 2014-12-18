@@ -15,8 +15,8 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 - [Quick start](#quick-start)
 - [API Reference](API.md)
 - [Examples](#examples)
-    - [Coffee-Script: Express.js Web Server](#coffee-script-expressjs-web-server)
-    - [JavaScript: Express.js Web Server](#javascript-expressjs-web-server)
+    - [Coffee-Script: Express.js Web Server](https://github.com/SpurFramework/spur-express-coffee-example)
+    - [JavaScript: Express.js Web Server](https://github.com/SpurFramework/spur-express-js-example)
 - [What is inversion of control and why you should use it?](#what-is-inversion-of-control-and-why-you-should-use-it)
 - [Development](#development)
     - [Testing](#testing)
@@ -43,23 +43,20 @@ Then:
 
 ```
 
+For
+
 #Examples
 
-##Coffee-Script: Express.js Web Server
+In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
 
-...
-
-##JavaScript: Express.js Web Server
-
-...
+ * [Coffee-Script: Express.js Web Server](https://github.com/SpurFramework/spur-express-coffee-example)
+ * [JavaScript: Express.js Web Server](https://github.com/SpurFramework/spur-express-js-example)
 
 #What is inversion of control and why you should use it?
 
 Inversion of Control (IoC) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory.
 
-
-
-
+...
 
 #Development
 
