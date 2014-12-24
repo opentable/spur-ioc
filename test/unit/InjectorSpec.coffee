@@ -60,7 +60,7 @@ describe "Injector", ->
 
     @injector1.inject ($injector)->
 
-      expect($injector.getArray(["a", "b"])).to.deep.equal {
+      expect($injector.getMap(["a", "b"])).to.deep.equal {
         a: 'a_updated', b: 'b'
       }
     DependencyResolver::throwError = ->

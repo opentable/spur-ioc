@@ -63,7 +63,7 @@ class DependencyResolver
         @checkResolvingFinished(
           "cannot use $injector.getRegex(#{regex}) asynchronously")
         @resolveRegex(regex)
-      getArray:(deps)=>
+      getMap:(deps)=>
         @checkResolvingFinished(
           "cannot use $injector.getArray() asynchronously")
         @resolveMap(deps)

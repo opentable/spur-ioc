@@ -19,7 +19,7 @@ class DependencyManagement
       if deps instanceof RegExp
         resolvedDeps = $injector.getRegex(deps)
       else if _.isArray(deps)
-        resolvedDeps = $injector.getArray(deps)
+        resolvedDeps = $injector.getMap(deps)
 
     @inject(fn)
     resolvedDeps
