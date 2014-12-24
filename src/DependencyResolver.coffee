@@ -27,7 +27,7 @@ class DependencyResolver
     @errors = []
     @resolvingFinished = false
     @stackFilter = stackFilter.configure({
-      # filters:["DependencyResolver."]
+      filters:["DependencyResolver."]
     })
 
   @resolve:(container, name, logger)->
