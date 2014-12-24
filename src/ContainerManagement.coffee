@@ -36,10 +36,24 @@ class ContainerManagement
   hasDependency:(name)->
     !!@dependencies[name]
 
-  use:(otherInjector)->
+  merge:(otherInjector, suppressWarning=false)->
     for k, v of otherInjector.dependencies
-      @addConstructedDependency(k,v)
+      @addConstructedDependency(k,v, suppressWarning)
     @
+
+  #deprecated use @merge
+  use:(otherInjector, suppressWarning=false)->
+    @merge(otherInjector, suppressWarning)
+
+  exposeAll:()->
+    @expose /.+/
+
+  expose:(@exposedDeps)->
+    @
+
+  link:(otherInjector)->
+    deps = otherInjector.resolveExposedDependencies()
+    @registerDependencies(deps)
 
 
 module.exports = ContainerManagement

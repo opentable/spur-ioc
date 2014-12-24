@@ -27,7 +27,7 @@ class DependencyResolver
     @errors = []
     @resolvingFinished = false
     @stackFilter = stackFilter.configure({
-      filters:["DependencyResolver."]
+      # filters:["DependencyResolver."]
     })
 
   @resolve:(container, name, logger)->
@@ -63,6 +63,14 @@ class DependencyResolver
         @checkResolvingFinished(
           "cannot use $injector.getRegex(#{regex}) asynchronously")
         @resolveRegex(regex)
+      getArray:(deps)=>
+        @checkResolvingFinished(
+          "cannot use $injector.getArray() asynchronously")
+        @resolveMap(deps)
+      getAll:()=>
+        @checkResolvingFinished(
+          "cannot use $injector.getAll() asynchronously")
+        @resolveRegex(/.+/)
     }, true).instance
 
   checkResolvingFinished:(message)->

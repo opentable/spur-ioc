@@ -1,4 +1,5 @@
 DependencyResolver = require "./DependencyResolver"
+_                  = require "lodash"
 
 class DependencyManagement
 
@@ -7,6 +8,21 @@ class DependencyManagement
 
   privateInjectorName:()->
     "$$"+@name
+
+
+  resolveExposedDependencies:()->
+    @injectAndReturn @exposedDeps
+
+  injectAndReturn:(deps)->
+    resolvedDeps = null
+    fn = ($injector)->
+      if deps instanceof RegExp
+        resolvedDeps = $injector.getRegex(deps)
+      else if _.isArray(deps)
+        resolvedDeps = $injector.getArray(deps)
+
+    @inject(fn)
+    resolvedDeps
 
   inject:(fn)->
     name = @privateInjectorName()

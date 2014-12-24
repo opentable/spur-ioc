@@ -33,7 +33,7 @@ describe "Injector", ->
       c:"c"
     })
     @injector1
-      .use(@injector2)
+      .merge(@injector2)
       .inject (a,b,c, $injector)->
         expect([a,b,c]).to.deep.equal [
           "a_updated", "b", "c"
@@ -53,6 +53,16 @@ describe "Injector", ->
     @injector1.inject ($injector)->
       expect($injector.getRegex(/ssd/)).to.deep.equal {}
 
+    @injector1.inject ($injector)->
+      expect($injector.getAll()).to.deep.equal {
+        a: 'a_updated', b: 'b', c: 'c'
+      }
+
+    @injector1.inject ($injector)->
+
+      expect($injector.getArray(["a", "b"])).to.deep.equal {
+        a: 'a_updated', b: 'b'
+      }
     DependencyResolver::throwError = ->
 
     @injector1.inject ($injector)->
@@ -91,3 +101,55 @@ describe "Injector", ->
       ,0
 
     @injector.inject (_, chai, $injector, foo)->
+
+  describe "expose and link", ->
+    beforeEach ->
+      @injector.registerDependencies {c:"c"}
+      @injector2 = Injector.create("injector2")
+      @injector2.registerDependencies {
+        a:"a"
+        b:"b"
+      }
+
+    it "expose - array", ->
+
+      @injector2.expose ["a"]
+      @injector.link(@injector2)
+
+      @injector.inject ($injector)->
+        expect($injector.getAll()).to.deep.equal {
+          c: 'c', a: 'a'
+        }
+
+    it "expose - regex", ->
+
+      @injector2.expose /b/
+      @injector.link(@injector2)
+
+      @injector.inject ($injector)->
+        expect($injector.getAll()).to.deep.equal {
+          c: 'c', b: 'b'
+        }
+
+    it "exposeAll", ->
+      @injector2.exposeAll()
+      @injector.link(@injector2)
+
+      @injector.inject ($injector)->
+        expect($injector.getAll()).to.deep.equal {
+          a:"a", c: 'c', b: 'b'
+        }
+
+    it "expose overwrite", ->
+      @injector.registerDependencies {"a":"A"}
+      @injector2.exposeAll()
+      @injector.link(@injector2)
+      @injector.inject ($injector)->
+        expect($injector.getAll()).to.deep.equal {
+          c: 'c', a: 'a', b: 'b'
+        }
+
+
+
+
+
