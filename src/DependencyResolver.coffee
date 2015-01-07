@@ -36,16 +36,16 @@ class DependencyResolver
     resolver
 
 
-  resolveArray:(deps)->
+  resolveArray:(deps, callChain)->
     instances = []
     for depName in deps
-      instances.push @resolveDependencies(depName)
+      instances.push @resolveDependencies(depName, callChain)
     instances
 
-  resolveMap:(deps)->
+  resolveMap:(deps, callChain)->
     instances = {}
     for depName in deps
-      instances[depName] = @resolveDependencies(depName)
+      instances[depName] = @resolveDependencies(depName, callChain)
     instances
 
   resolveRegex:(regex)=>
@@ -58,29 +58,29 @@ class DependencyResolver
       get:(name)=>
         @checkResolvingFinished(
           "cannot use $injector.get('#{name}') asynchronously")
-        @resolveDependencies(name)
+        @resolveDependencies(name, @currentCallChain)
       getRegex:(regex)=>
         @checkResolvingFinished(
           "cannot use $injector.getRegex(#{regex}) asynchronously")
-        @resolveRegex(regex)
+        @resolveRegex(regex, @currentCallChain)
       getMap:(deps)=>
         @checkResolvingFinished(
           "cannot use $injector.getArray() asynchronously")
-        @resolveMap(deps)
+        @resolveMap(deps, @currentCallChain)
       getAll:()=>
         @checkResolvingFinished(
           "cannot use $injector.getAll() asynchronously")
-        @resolveRegex(/.+/)
+        @resolveRegex(/.+/, @currentCallChain)
     }, true).instance
 
   checkResolvingFinished:(message)->
     if @resolvingFinished
       throw new Error(message)
 
-  resolveDependencies:(name)=>
-    @callChain =
-      if @callChain
-        @callChain.add(name)
+  resolveDependencies:(name, callChain)=>
+    @currentCallChain = callChain =
+      if callChain
+        callChain.add(name)
       else
         CallChain.create(name)
 
@@ -89,18 +89,18 @@ class DependencyResolver
       if dep.instance
         return dep.instance
       else
-        if @callChain.hasCyclic()
-          @errors.push DependencyError.cyclic(@callChain)
+        if callChain.hasCyclic()
+          @errors.push DependencyError.cyclic(callChain)
         else
-          instances = @resolveArray(dep.dependencies)
+          instances = @resolveArray(dep.dependencies, callChain)
           try
             dep.instance = dep.fn.apply null, instances
           catch e
             @cleanStack(e)
-            @errors.push(DependencyError.exception(@callChain, e))
+            @errors.push(DependencyError.exception(callChain, e))
           dep.instance
     else
-      @errors.push DependencyError.missingDependency(@callChain)
+      @errors.push DependencyError.missingDependency(callChain)
       return null
 
   cleanStack:(e)->

@@ -63,6 +63,12 @@ describe "Injector", ->
       expect($injector.getMap(["a", "b"])).to.deep.equal {
         a: 'a_updated', b: 'b'
       }
+
+    @injector1.inject ($injector)->
+
+      expect($injector.getMap(["a", "b"])).to.deep.equal {
+        a: 'a_updated', b: 'b'
+      }
     DependencyResolver::throwError = ->
 
     @injector1.inject ($injector)->
@@ -72,6 +78,15 @@ describe "Injector", ->
     console.log error
     expect(error.error).to.equal "Missing Dependency"
     expect(error.callChain.getPath()).to.equal "$$injector1 -> $injector -> missing"
+
+    @injector1.addResolvableDependency "a", (b)->
+    @injector1.addResolvableDependency "b", (a)->
+    @injector1.inject ($injector)->
+      $injector.get "a"
+    cyclicError = @injector1.resolver.errors[0]
+    expect(cyclicError.error).to.equal "Cyclic Dependency"
+    expect(cyclicError.callChain.getPath())
+      .to.equal "$$injector1 -> $injector -> a -> b -> a"
 
 
   it "registeration methods", ->
