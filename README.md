@@ -27,12 +27,11 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 
 #Features
 
-  * Dependency injection (IoC)
+  * Dependency injection (IoC) inspired by angular.js
   * Auto injects folders
   * Ability to merge injectors
   * Ability to link injectors
   * Makes testing super easy
-
 
 #Example
 
