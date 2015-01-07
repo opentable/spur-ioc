@@ -28,24 +28,129 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 #Features
 
   * Dependency injection (IoC)
-  * ...
+  * Auto injects folders
+  * Ability to merge injectors
+  * Ability to link injectors
+  * Makes testing super easy
 
 
-#Quick start
+#Example
 
 ```bash
-$ npm install spur-ioc
+$ npm install spur-ioc --save
 ```
 
-Then:
+Then: Define lib/injector.js
 
 ```javascript
+var spur = require("spur-ioc");
+
+module.exports = function(){
+  //define a  new injector
+  var ioc = spur.create("demo");
+
+  //register node modules to be injected
+  ioc.registerLibraries({
+    "_"          : "underscore",
+    "path"       : "path"
+  });
+
+  //register already constructed objects such as globals
+  ioc.registerDependencies({
+    "console"     :console,
+    "nodeProcess" :process
+  });
+
+  //register folders in your project to be autoinjected
+  ioc.registerFolders(__dirname, [
+    "demo"
+  ]);
+
+  return ioc;
+}
+```
+
+Example auto injection in lib/demo/Tasks.js
+
+```javascript
+//underscore auto injected by name
+//Tasks becomes a dependency itself
+module.exports = function(_){
+    return _.map([1,2,3], function(num) {
+        return "Task " + num
+    });
+}
+```
+then in lib/demo/TasksPrinter.js
+```javascript
+//Tasks and console autoinjected
+module.exports = function(Tasks, console){
+    return {
+        print:function(){
+            console.log(Tasks)
+        }
+    }
+}
+```
+
+then to run the app, create lib/start.js
+
+```javascript
+var injector = require("./injector");
+
+injector().inject(function(TasksPrinter){
+  TasksPrinter.print(); // prints ["Task 1", "Task 2", "Task 3"]
+});
+```
+#Testing
+Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
+
+in test/unit/TasksPrinterSpec.coffee
+
+```coffeescript
+injector = require "../../lib/injector"
+describe "TasksPrinter", ->
+  beforeEach ->
+    @mockConsole =
+        logs:[]
+        log:()-> @logs.push(arguments)
+
+    #below we replace the console dependency silently
+    injector()
+        .addDependency("console", @mockConsole, true)
+        .inject (@TasksPrinter)=>
+
+
+  it "should exist", ->
+    expect(@TasksPrinter).to.exist
+
+  it "should greet correctly", ->
+    @TasksPrinter.print()
+    expect(@mockConsole.logs[0][0]).to.deep.equal [
+        "Task 1", "Task 2", "Task 3"
+    ]
 
 ```
 
-For
+#Error reporting
+One of the great things about ioc is that you get real application dependency errors upfront at startup
 
-#Examples
+Missing dependency with typo
+```javascript
+module.exports = function(TaskZ, console){
+  //...
+}
+produces
+ERROR Missing Dependency TaskZ in  $$demo -> TasksPrinter -> TaskZ
+```
+Adding a cyclic dependency back to TasksPrinter in Tasks.js
+```javascript
+module.exports = function(_, TasksPrinter){
+produces
+ERROR Cyclic Dependency TasksPrinter in  $$demo -> TasksPrinter -> Tasks -> TasksPrinter
+```
+
+#More Examples
 
 In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
 
@@ -62,7 +167,7 @@ Inversion of Control (IoC) is also known as Dependency Injection (DI). IoC is a 
 
 ...
 
-##Testing
+##Running the tests Testing
 
 To run the test suite, first install the dependancies, then run `npm test`:
 
