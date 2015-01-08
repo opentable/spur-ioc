@@ -145,6 +145,8 @@ describe("Greeter", function(){
   })
 });
 ```
+Example: Unit Testing in coffeescript
+
 ```coffeescript
 describe "Greeter", ->
   beforeEach ->
@@ -269,16 +271,23 @@ Sometimes you want to inject multiple dependencies without listing them all out.
 getRegex will return a key:value object with dependencies matching the regex
 ```javascript
 module.exports = function($injector){
-  //inject controllers by regex
+  //inject controllers by regex, convention is to have this calls at the top
   var controllers = $injector.getRegex(/Controller$/);
   // returns {
     AppController:<AppControllerInstance>,
     TasksController:<TasksControllerInstance>
     ...
   }
-}
+  //this will fail!, injector is disposed at startup,
+  //cannot be used asynchronously
+  setTimeout(function(){
+    var controllers = $injector.getRegex(/Controller$/);
 
+  }, 100);
+}
 ```
+*note that $injector can only retrieve dependencies synchronously at startup.
+*this is because spur-ioc resolves dependencies only at startup and then gets out the way to let the app work normally with those references
 
 
 
