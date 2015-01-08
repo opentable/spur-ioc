@@ -1,3 +1,34 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [API](#api)
+  - [Spur](#spur)
+      - [`spur.create()`](#spurcreatename)
+  - [Injector](#injector)
+      - [`ioc.registerLibraries(<object mapping>)`](#iocregisterlibrariesobject-mapping)
+  - [](#)
+      - [`ioc.registerDependencies(<object mapping>)`](#iocregisterdependenciesobject-mapping)
+  - [](#-1)
+      - [`ioc.registerFolders(<dirname>, <array of foldernames>)`](#iocregisterfoldersdirname-array-of-foldernames)
+      - [`Dependency Signature`](#moduleexports-=-functiondep1-dep2-)
+  - [](#-2)
+      - [`ioc.addDependency(<depname>, <dependency>)`](#iocadddependencydepname-dependency-supress-dup-warning)
+  - [](#-3)
+      - [`ioc.addResolvableDependency(<depname>, <function>)`](#iocaddresolvabledependencydepname-function-supress-dup-warning)
+      - [`ioc.inject(<injection function>)`](#iocinjectinjection-function)
+  - [Using Multiple Injectors](#using-multiple-injectors)
+    - [Merge Example:](#merge-example)
+      - [`ioc.merge(<anotherInjector>)`](#iocmergeanotherinjector)
+    - [Expose + Link Example:](#expose--link-example)
+      - [`ioc.expose(<array of dep names>)`](#iocexposearray-of-dep-names)
+      - [`ioc.expose(<regex>)`](#iocexposeregex)
+      - [`ioc.exposeAll()`](#iocexposeall)
+      - [`ioc.link(<other-injector>)`](#ioclinkother-injector)
+  - [$injector helper](#$injector-helper)
+      - [`$injector.getRegex(<regex to match dependencies>)`](#$injectorgetregexregex-to-match-dependencies)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 #API
 
 ##Spur
