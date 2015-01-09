@@ -21,10 +21,21 @@ class DependencyError
     logger.error @errorObject if @errorObject
     logger.error @errorObject.stack if @errorObject
 
+class DependencyWarning
+  constructor:(@callChain, @name, @warningObject)->
+
+  @unused:(callChain)->
+    new DependencyWarning(callChain, "Unused dependency")
+
+  print:(logger)->
+    logger.warn @name + " #{@callChain.getHighlightedName()} in ", @callChain.getPath(true)
+
 class DependencyResolver
 
   constructor:(@container, @name, @logger)->
     @errors = []
+    @warnings = []
+
     @resolvingFinished = false
     @stackFilter = stackFilter.configure({
       filters:["DependencyResolver."]
@@ -94,6 +105,10 @@ class DependencyResolver
         else
           instances = @resolveArray(dep.dependencies, callChain)
           try
+            for dependency in dep.dependencies
+              if dep.fn.toString().split( dependency ).length <= 2
+                @warnings.push(DependencyWarning.unused(callChain.add(dependency)))
+
             dep.instance = dep.fn.apply null, instances
           catch e
             @cleanStack(e)
@@ -111,12 +126,17 @@ class DependencyResolver
     for e in @errors
       e.print(@logger)
 
+  printWarnings:()->
+    for w in @warnings
+      w.print(@logger)
+
   throwError:()->
     throw new Error("Resolver encountered errors")
 
   resolve:()->
     @addInjectorDependency()
     @dependency = @resolveDependencies(@name)
+    @printWarnings()
     if @errors.length > 0
       @printErrors()
       @throwError()
