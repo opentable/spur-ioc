@@ -45,22 +45,22 @@ Then: Define lib/injector.js
 var spur = require("spur-ioc");
 
 module.exports = function(){
-  //define a  new injector
+  // define a  new injector
   var ioc = spur.create("demo");
 
-  //register node modules to be injected
+  // register node modules to be injected
   ioc.registerLibraries({
-    "_"          : "underscore",
-    "path"       : "path"
+    "_"      : "underscore",
+    "path"   : "path"
   });
 
-  //register already constructed objects such as globals
+  // register already constructed objects such as globals
   ioc.registerDependencies({
     "console"     :console,
     "nodeProcess" :process
   });
 
-  //register folders in your project to be autoinjected
+  // register folders in your project to be autoinjected
   ioc.registerFolders(__dirname, [
     "demo"
   ]);
@@ -72,39 +72,41 @@ module.exports = function(){
 Example auto injection in lib/demo/Tasks.js
 
 ```javascript
-//underscore auto injected by name
-//Tasks becomes a dependency itself
+// underscore auto injected by name
+// Tasks becomes a dependency itself
 module.exports = function(_){
     return _.map([1,2,3], function(num) {
         return "Task " + num
     });
 }
 ```
-then in lib/demo/TasksPrinter.js
+Then in lib/demo/TasksPrinter.js
+
 ```javascript
-//Tasks and console autoinjected
+// Tasks and console autoinjected
 module.exports = function(Tasks, console){
     return {
         print:function(){
             console.log(Tasks)
         }
-    }
+    };
 }
 ```
 
-then to run the app, create lib/start.js
+Then to run the app, create lib/start.js
 
 ```javascript
 var injector = require("./injector");
 
 injector().inject(function(TasksPrinter){
-  TasksPrinter.print(); // prints ["Task 1", "Task 2", "Task 3"]
+  TasksPrinter.print();
+  // prints ["Task 1", "Task 2", "Task 3"]
 });
 ```
 #Testing
 Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
 
-in test/unit/TasksPrinterSpec.coffee
+In test/unit/TasksPrinterSpec.coffee
 
 ```coffeescript
 injector = require "../../lib/injector"
@@ -119,7 +121,6 @@ describe "TasksPrinter", ->
         .addDependency("console", @mockConsole, true)
         .inject (@TasksPrinter)=>
 
-
   it "should exist", ->
     expect(@TasksPrinter).to.exist
 
@@ -128,25 +129,31 @@ describe "TasksPrinter", ->
     expect(@mockConsole.logs[0][0]).to.deep.equal [
         "Task 1", "Task 2", "Task 3"
     ]
-
 ```
 
 #Error reporting
 One of the great things about ioc is that you get real application dependency errors upfront at startup
 
 Missing dependency with typo
+
 ```javascript
 module.exports = function(TaskZ, console){
   //...
 }
-produces
-ERROR Missing Dependency TaskZ in  $$demo -> TasksPrinter -> TaskZ
+
+// Produces:
+// ERROR Missing Dependency TaskZ in  $$demo -> TasksPrinter -> TaskZ
 ```
+
 Adding a cyclic dependency back to TasksPrinter in Tasks.js
+
 ```javascript
 module.exports = function(_, TasksPrinter){
-produces
-ERROR Cyclic Dependency TasksPrinter in  $$demo -> TasksPrinter -> Tasks -> TasksPrinter
+  //...
+}
+
+// Produces:
+// ERROR Cyclic Dependency TasksPrinter in  $$demo -> TasksPrinter -> Tasks -> TasksPrinter
 ```
 
 #More Examples
