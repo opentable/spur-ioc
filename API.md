@@ -68,7 +68,7 @@ ioc.registerLibraries({
 });
 ```
 
-* Note that we use `camelCase` convention for dependency name as hiphens are not valid in javascript variable names.
+Note that we use `camelCase` convention for dependency name as hiphens are not valid in javascript variable names.
 
 ---
 
@@ -221,7 +221,7 @@ Spur IoC allows you to split up injectors and create resuable modules, modules t
 
 Merging allows you to combine multiple injectors in to 1 bigger injector if you had core utilities you could merge them into your app injectors and use them within your business logic.
 
-* Note that merging will share 1 namespace and could overwrite dependencies with the same name.
+Note that merging will share 1 namespace and could overwrite dependencies with the same name.
 
 ####`ioc.merge(<anotherInjector>)`
 
@@ -373,5 +373,5 @@ module.exports = function($injector){
 };
 ```
 
-* Note that $injector can only retrieve dependencies synchronously at startup.
-* This is because spur-ioc resolves dependencies only at startup and then gets out the way to let the app work normally with those references.
+*Note that $injector can only retrieve dependencies synchronously at startup.
+*This is because spur-ioc resolves dependencies only at startup and then gets out the way to let the app work normally with those references.
