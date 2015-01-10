@@ -5,7 +5,7 @@
 - [API](#api)
   - [Spur](#spur)
       - [`spur.create(<name>)`](#spurcreatename)
-  - [Injector](#injector)
+  - [Dependency registration](#dependency-registration)
       - [`ioc.registerLibraries(<object mapping>)`](#iocregisterlibrariesobject-mapping)
   - [](#)
       - [`ioc.registerDependencies(<object mapping>)`](#iocregisterdependenciesobject-mapping)
@@ -16,8 +16,10 @@
       - [`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`](#iocadddependencydepname-dependency-supress-dup-warning)
   - [](#-3)
       - [`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`](#iocaddresolvabledependencydepname-function-supress-dup-warning)
-  - [](#-4)
+  - [Injector](#injector)
       - [`ioc.inject(<injection function>)`](#iocinjectinjection-function)
+  - [](#-4)
+      - [Injection signature `module.exports = function(dep1, dep2, ...){`](#injection-signature-moduleexports-=-functiondep1-dep2-)
   - [Using Multiple Injectors](#using-multiple-injectors)
     - [Merge Example:](#merge-example)
       - [`ioc.merge(<anotherInjector>)`](#iocmergeanotherinjector)
@@ -49,7 +51,7 @@ module.exports = function(){
 };
 ```
 
-##Injector
+##Dependency registration
 
 ####`ioc.registerLibraries(<object mapping>)`
 
@@ -158,7 +160,7 @@ ioc.addResolvableDependency("UncaughtHandler", function(nodeProcess, console){
 };
 ```
 
----
+##Injector
 
 ####`ioc.inject(<injection function>)`
 
@@ -211,6 +213,21 @@ describe "Greeter", ->
 
   it "should greet correctly", ->
     expect(@Greeter.greet()).to.equal "Hello World!"
+```
+
+---
+
+####Injection signature `module.exports = function(dep1, dep2, ...){`
+
+All autoinjected files must have the following signature which exports a function with the dependencies it needs, spur will autoinject by name.
+
+Example
+
+```javascript
+// In WebServer.js
+module.exports = function(Book, BookMapper, express){
+    //...
+};
 ```
 
 ##Using Multiple Injectors
