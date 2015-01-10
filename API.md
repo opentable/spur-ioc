@@ -12,11 +12,11 @@
   - [](#-1)
       - [`ioc.registerFolders(<dirname>, <array of foldernames>)`](#iocregisterfoldersdirname-array-of-foldernames)
       - [`module.exports = function(dep1, dep2, ...){`](#moduleexports-=-functiondep1-dep2-)
-  - [](#-2)
-      - [`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`](#iocadddependencydepname-dependency-supress-dup-warning)
-  - [](#-3)
-      - [`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`](#iocaddresolvabledependencydepname-function-supress-dup-warning)
   - [```](#)
+      - [`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`](#iocadddependencydepname-dependency-supress-dup-warning)
+  - [```](#-1)
+      - [`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`](#iocaddresolvabledependencydepname-function-supress-dup-warning)
+  - [```](#-2)
       - [`ioc.inject(<injection function>)`](#iocinjectinjection-function)
   - [Using Multiple Injectors](#using-multiple-injectors)
     - [Merge Example:](#merge-example)
@@ -103,14 +103,14 @@ ioc.registerFolders(__dirname, [
 
 Given this folder structure:
 
-.
+```
 +-- runtime
 |   +-- WebServer.js
 +-- domain
 |   +-- Book.js
 |   +-- mappers
 |   |   +-- BookMapper.coffee
-
+```
 
 The files `WebServer.js`, `Book.js`, `BookMapper.coffee` will be autoinjected by their filename without extension.
 
@@ -126,7 +126,6 @@ module.exports = function(Book, BookMapper, express){
     //...
 };
 ```
-
 ---
 
 ####`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`
@@ -140,7 +139,6 @@ ioc.addDependency("console", console);
 ioc.addDependency("console", console); //warns of overwritten dependency
 ioc.addDependency("console", console, true); //surpress warning
 ```
-
 ---
 
 ####`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`
@@ -150,7 +148,7 @@ Register a resolvable dependency function.
 Example:
 
 ```javascript
-//function params will be autoinjected
+// function params will be autoinjected
 ioc.addResolvableDependency("UncaughtHandler", function(nodeProcess, console){
   nodeProcess.on("uncaughtException", function(err){
       console.log(err);
