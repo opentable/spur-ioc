@@ -374,4 +374,5 @@ module.exports = function($injector){
 ```
 
 *Note that $injector can only retrieve dependencies synchronously at startup.
+
 *This is because spur-ioc resolves dependencies only at startup and then gets out the way to let the app work normally with those references.
