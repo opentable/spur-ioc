@@ -19,7 +19,7 @@
   - [Injector](#injector)
       - [`ioc.inject(<injection function>)`](#iocinjectinjection-function)
   - [](#-4)
-      - [Injection signature `module.exports = function(dep1, dep2, ...){`](#injection-signature-moduleexports-=-functiondep1-dep2-)
+      - [Injection signature for module.exports](#injection-signature-for-moduleexports)
   - [Using Multiple Injectors](#using-multiple-injectors)
     - [Merge Example:](#merge-example)
       - [`ioc.merge(<anotherInjector>)`](#iocmergeanotherinjector)
@@ -217,7 +217,7 @@ describe "Greeter", ->
 
 ---
 
-####Injection signature `module.exports = function(dep1, dep2, ...){`
+####Injection signature for module.exports
 
 All autoinjected files must have the following signature which exports a function with the dependencies it needs, spur will autoinject by name.
 
