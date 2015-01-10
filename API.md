@@ -12,11 +12,11 @@
   - [](#-1)
       - [`ioc.registerFolders(<dirname>, <array of foldernames>)`](#iocregisterfoldersdirname-array-of-foldernames)
       - [`module.exports = function(dep1, dep2, ...){`](#moduleexports-=-functiondep1-dep2-)
-  - [```](#)
+  - [](#-2)
       - [`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`](#iocadddependencydepname-dependency-supress-dup-warning)
-  - [```](#-1)
+  - [](#-3)
       - [`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`](#iocaddresolvabledependencydepname-function-supress-dup-warning)
-  - [```](#-2)
+  - [](#-4)
       - [`ioc.inject(<injection function>)`](#iocinjectinjection-function)
   - [Using Multiple Injectors](#using-multiple-injectors)
     - [Merge Example:](#merge-example)
@@ -55,8 +55,7 @@ module.exports = function(){
 
 Register external node modules.
 
-Example:
-
+Example
 ```javascript
 ioc.registerLibraries({
   "express"         : "express",
@@ -76,7 +75,7 @@ Note that we use `camelCase` convention for dependency name as hiphens are not v
 
 Register already constructed objects or global dependencies which can be mocked in your tests.
 
-Example:
+Example
 
 ```javascript
 ioc.registerDependencies({
@@ -101,7 +100,7 @@ ioc.registerFolders(__dirname, [
 ]);
 ```
 
-Given this folder structure:
+Given this folder structure
 
 ```
 +-- runtime
@@ -118,7 +117,7 @@ The files `WebServer.js`, `Book.js`, `BookMapper.coffee` will be autoinjected by
 
 All autoinjected files must have the following signature which exports a function with the dependencies it needs, spur will autoinject by name.
 
-Example:
+Example
 
 ```javascript
 // In WebServer.js
@@ -126,26 +125,28 @@ module.exports = function(Book, BookMapper, express){
     //...
 };
 ```
+
 ---
 
 ####`ioc.addDependency(<depname>, <dependency>, <supress dup warning>)`
 
 The singular version of register dependencies.
 
-Example:
+Example
 
 ```javascript
 ioc.addDependency("console", console);
 ioc.addDependency("console", console); //warns of overwritten dependency
 ioc.addDependency("console", console, true); //surpress warning
 ```
+
 ---
 
 ####`ioc.addResolvableDependency(<depname>, <function>, <supress dup warning>)`
 
 Register a resolvable dependency function.
 
-Example:
+Example
 
 ```javascript
 // function params will be autoinjected
@@ -156,6 +157,7 @@ ioc.addResolvableDependency("UncaughtHandler", function(nodeProcess, console){
   });
 };
 ```
+
 ---
 
 ####`ioc.inject(<injection function>)`
