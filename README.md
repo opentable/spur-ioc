@@ -1,5 +1,5 @@
 [![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
-[![Build Status](https://travis-ci.org/SpurFramework/spur-ioc.png?branch=master)](https://travis-ci.org/SpurFramework/spur-ioc)
+[![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc)
 
 #Introduction
 
@@ -15,8 +15,8 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 - [Quick start](#quick-start)
 - [API Reference](API.md)
 - [Examples](#examples)
-    - [Coffee-Script: Express.js Web Server](https://github.com/SpurFramework/spur-express-coffee-example)
-    - [JavaScript: Express.js Web Server](https://github.com/SpurFramework/spur-express-js-example)
+    - [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
+    - [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
 - [What is inversion of control and why you should use it?](#what-is-inversion-of-control-and-why-you-should-use-it)
 - [Development](#development)
     - [Testing](#testing)
@@ -153,8 +153,8 @@ ERROR Cyclic Dependency TasksPrinter in  $$demo -> TasksPrinter -> Tasks -> Task
 
 In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
 
- * [Coffee-Script: Express.js Web Server](https://github.com/SpurFramework/spur-express-coffee-example)
- * [JavaScript: Express.js Web Server](https://github.com/SpurFramework/spur-express-js-example)
+ * [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
+ * [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
 
 #What is inversion of control and why you should use it?
 
