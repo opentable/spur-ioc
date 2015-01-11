@@ -10,9 +10,14 @@
     {
       "name": "Agustin Colchado",
       "email": "agustin@colchado.com"
+    },
+    {
+      "name": "Joseph McElroy",
+      "email": "phoey1@gmail.com"
     }
   ],
   "keywords": [
+    "spur",
     "IoC",
     "di",
     "inversion of control",
@@ -32,17 +37,18 @@
     "type": "git",
     "url": "git://github.com/opentable/spur-ioc.git"
   },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "dependencies": {
     "coffee-script": "1.8.0",
     "lodash": "2.4.1",
-    "stack-filter": "^1.0.0",
-    "require-all": "^1.0.0"
+    "require-all": "^1.0.0",
+    "stack-filter": "^1.0.0"
   },
   "devDependencies": {
+    "mocha": "^2.0.1",
     "chai": "^1.10.0",
-    "mocha": "^2.0.1"
-  },
-  "engines": {
-    "node": ">= 0.10.0"
+    "sinon": "^1.12.1"
   }
 }
