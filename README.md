@@ -1,13 +1,17 @@
-[![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
-[![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc)
+<div>
+    <img src="https://raw.githubusercontent.com/opentable/spur-ioc/master/media/spur-ioc.png" alt="Spur: IoC" title="Spur: IoC" />
 
-#Introduction
+    <a href="http://www.opentable.com/careers/technology/">
+        <img src="https://raw.githubusercontent.com/opentable/spur-ioc/master/media/opentable-engineering.png" alt="OpenTable | Engineering" title="OpenTable | Engineering" align="right" />
+    </a>
+</div>
 
 Dependency Injection Framework for [Node.js](http://nodejs.org/).
 
-###Status
+The project is still a work in progress. We are in the middle of making adjustments and are starting to dogfood the module in our own applications.
 
-Spur-IoC is still a work in progress. We are in the middle of making adjustments prior to dogfooding the module in our own applications.
+[![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
+[![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc)
 
 #Topics
 
@@ -27,11 +31,14 @@ Spur-IoC is still a work in progress. We are in the middle of making adjustments
 
 #Features
 
-  * Dependency injection (IoC) inspired by angular.js
+  * Dependency injection (IoC) inspired by AngularJS
   * Auto injects folders
   * Ability to merge injectors
   * Ability to link injectors
   * Makes testing super easy
+    * Ability to substitute dependencies in tests
+  * Resolution of dependencies by querying via regular expresion
+  * Clear error stack trace reporting
 
 #Example
 
@@ -104,6 +111,7 @@ injector().inject(function(TasksPrinter){
 });
 ```
 #Testing
+
 Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
 
 In test/unit/TasksPrinterSpec.coffee
@@ -132,6 +140,7 @@ describe "TasksPrinter", ->
 ```
 
 #Error reporting
+
 One of the great things about ioc is that you get real application dependency errors upfront at startup
 
 Missing dependency with typo
@@ -165,9 +174,15 @@ In order to illustrate how to use Spur IoC, we created sample apps in both Coffe
 
 #What is inversion of control and why you should use it?
 
-Inversion of Control (IoC) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory.
+[Inversion of Control (IoC)](http://en.wikipedia.org/wiki/Inversion_of_control) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory. In short, the dependency is pushed to the class from the outside. All that means is that you shouldn't instantiate dependencies from inside the class.
 
-...
+Inversion of control is used to increase modularity of the program and make it extensible, and has applications in object-oriented programming and other programming paradigms.
+
+It allows for the creation of cleaner and more modular code that is easier to develop, test and maintain:
+
+* Single responsibility classes
+* Easier mocking of objects for test fixtures
+* Easier debugging in Node.js' async environment
 
 #Development
 
@@ -182,18 +197,10 @@ $ npm install
 $ npm test
 ```
 
-##Styleguide
-
-...
-
 #License
 
 [MIT](LICENSE)
 
 #Changelog
 
-  * Initial commit
-
-#Contributing
-
-...
+  * Initial commit and alpha release
