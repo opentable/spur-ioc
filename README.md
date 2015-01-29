@@ -55,20 +55,11 @@ module.exports = function(){
   // define a  new injector
   var ioc = spur.create("demo");
 
-<<<<<<< HEAD
-  //register external dependencies or globals
-=======
-  // register node modules to be injected
-  ioc.registerLibraries({
-    "_"      : "underscore",
-    "path"   : "path"
-  });
 
-  // register already constructed objects such as globals
->>>>>>> 5e79af69252bc0b46498130347eb2f213ea7fd00
+  //register external dependencies or globals
   ioc.registerDependencies({
     "_"           : require("underscore"),
-    "path"        : require("path")
+    "path"        : require("path"),
     "console"     : console,
     "nodeProcess" : process
   });
