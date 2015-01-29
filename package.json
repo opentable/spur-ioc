@@ -1,9 +1,23 @@
 {
   "name": "spur-ioc",
   "description": "Dependency Injection Framework for Node.js",
-  "version": "0.0.7",
-  "author": "Siavash Etemadieh <ssetem@googlemail.com>",
+  "version": "0.0.9",
+  "author": {
+    "name": "Siavash Etemadieh",
+    "email": "ssetem@googlemail.com"
+  },
+  "contributors": [
+    {
+      "name": "Agustin Colchado",
+      "email": "agustin@colchado.com"
+    },
+    {
+      "name": "Joseph McElroy",
+      "email": "phoey1@gmail.com"
+    }
+  ],
   "keywords": [
+    "spur",
     "IoC",
     "di",
     "inversion of control",
@@ -16,24 +30,25 @@
     "test": "mocha --opts ./test/mocha.opts ./test/"
   },
   "bugs": {
-    "url": "https://github.com/SpurFramework/spur-ioc/issues"
+    "url": "https://github.com/opentable/spur-ioc/issues"
   },
-  "homepage": "https://github.com/SpurFramework/spur-ioc",
+  "homepage": "https://github.com/opentable/spur-ioc",
   "repository": {
     "type": "git",
-    "url": "git://github.com/SpurFramework/spur-ioc.git"
+    "url": "git://github.com/opentable/spur-ioc.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
   },
   "dependencies": {
     "coffee-script": "1.8.0",
     "lodash": "2.4.1",
-    "stack-filter": "^1.0.0",
-    "require-all": "^1.0.0"
+    "require-all": "^1.0.0",
+    "stack-filter": "^1.0.0"
   },
   "devDependencies": {
+    "mocha": "^2.0.1",
     "chai": "^1.10.0",
-    "mocha": "^2.0.1"
-  },
-  "engines": {
-    "node": ">= 0.10.0"
+    "sinon": "^1.12.1"
   }
 }

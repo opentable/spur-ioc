@@ -89,7 +89,7 @@ describe "Injector", ->
       .to.equal "$$injector1 -> $injector -> a -> b -> a"
 
 
-  it.only "registeration methods", ->
+  it "registeration methods", ->
     @injector.logger.warn = (@warningMessage)=>
     @injector.registerLibraries({
       "_":"lodash"
