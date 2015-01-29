@@ -89,13 +89,16 @@ describe "Injector", ->
       .to.equal "$$injector1 -> $injector -> a -> b -> a"
 
 
-  it "registeration methods", ->
+  it.only "registeration methods", ->
+    @injector.logger.warn = (@warningMessage)=>
     @injector.registerLibraries({
       "_":"lodash"
       "chai":"chai"
-    }).inject (_, chai)->
+    }).inject (_, chai)=>
       expect(_.groupBy).to.exist()
       expect(chai.Assertion).to.exist()
+      expect(@warningMessage).to.equal(
+        "registerLibraries is deprecated, use registerDependencies with explicit require instead.")
 
   it "dont allow async use of $injector", (done)->
 

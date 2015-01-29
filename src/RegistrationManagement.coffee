@@ -29,6 +29,7 @@ class RegistrationManagement
     @
 
   registerLibraries:(libraries)->
+    @logger.warn "registerLibraries is deprecated, use registerDependencies with explicit require instead."
     for depName,libName of libraries
       @addDependency(depName,require(libName))
     @

@@ -5,7 +5,7 @@
   - [Spur](#spur)
       - [`spur.create()`](#spurcreatename)
   - [Injector](#injector)
-      - [`ioc.registerLibraries(<object mapping>)`](#iocregisterlibrariesobject-mapping)
+      - [(deprecated)`ioc.registerLibraries(<object mapping>)`](#iocregisterlibrariesobject-mapping)
   - [](#)
       - [`ioc.registerDependencies(<object mapping>)`](#iocregisterdependenciesobject-mapping)
   - [](#-1)
@@ -49,39 +49,35 @@ module.exports = function(){
 
 ##Injector
 
-####`ioc.registerLibraries(<object mapping>)`
-Register external node modules
+#### (depcrecated) `ioc.registerLibraries(<object mapping>)`
 
+For registering external node modules please use ioc.registerDepdendencies
 
-Example:
-
-```javascript
-ioc.registerLibraries({
-    "express"         : "express",
-    "methodOverride"  : "method-override",
-    "cookieParser"    : "cookie-parser",
-    "bodyParser"      : "body-parser",
-    "path"            : "path",
-    "fs"              : "fs"
-});
-```
-Note that we use `camelCase` convention for dependency name as hiphens are not valid in javascript variable names
 
 ---
 ####`ioc.registerDependencies(<object mapping>)`
-Register already constructed objects or global dependencies which can be mocked in your tests
+Register external node modules or already constructed objects or global dependencies which can be mocked in your tests
 
 Example:
 ```javascript
   ioc.registerDependencies({
-    "JSON":JSON,
-    "console":console,
-    "nodeProcess":process,
-    "Schema":require("mongoose").Schema
+    "express"         : require("express"),
+    "methodOverride"  : require("method-override"),
+    "cookieParser"    : require("cookie-parser"),
+    "bodyParser"      : require("body-parser"),
+    "path"            : require("path"),
+    "fs"              : require("fs"),
+    "JSON"            : JSON,
+    "console"         : console,
+    "nodeProcess"     : process,
+    "Schema"          : require("mongoose").Schema
   });
 ```
 
 This is useful to cover hard to test calls to the global process or global console object
+
+Note that we use `camelCase` convention for dependency name as hiphens are not valid in javascript variable names
+
 
 ---
 ####`ioc.registerFolders(<dirname>, <array of foldernames>)`
@@ -234,9 +230,9 @@ in CoreApisInjector.js
 var spur = require("spur-ioc");
 module.exports = function(){
     var ioc = spur.create("core-apis");
-    ioc.registerLibraries({
-        "request":"request",
-        "_":"lodash"
+    ioc.registerDependencies({
+        "request": require("request"),
+        "_"      : require("lodash")
     })
     ioc.registerFolders(__dirname, [
         "api"
@@ -285,7 +281,7 @@ ioc.expose(["PathUtils", "MyLogger"]);
 ####`ioc.expose(<regex>)`
 Example:
 ```javascript
-//depednencies ending with controller
+//dependencies ending with controller
 ioc.expose(/.+Controller$/);
 ```
 ####`ioc.exposeAll()`
