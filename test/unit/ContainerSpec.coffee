@@ -11,7 +11,7 @@ describe "injector - Container Management", ->
 
 
   it "addResolvableDependency", ->
-    @injector.addResolvableDependency "foo", (bar)->
+    @injector.addResolvableDependency "foo", (@bar)->
     dep = @injector.getDependency("foo")
     expect(dep.dependencies).to.deep.equal ["bar"]
     expect(dep.name).to.equal "foo"
