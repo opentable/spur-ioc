@@ -54,7 +54,7 @@ module.exports = function(){
 
 ##Dependency registration
 
-#### (depcrecated) `ioc.registerLibraries(<object mapping>)`
+#### (deprecated) `ioc.registerLibraries(<object mapping>)`
 
 For registering external node modules please use ioc.registerDepdendencies
 
