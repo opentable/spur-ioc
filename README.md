@@ -1,13 +1,6 @@
-<div>
-    <img src="https://raw.githubusercontent.com/opentable/spur-ioc/master/media/spur-ioc.png" alt="Spur: IoC" title="Spur: IoC">
-    <a href="http://www.opentable.com/careers/technology/">
-        <img src="https://raw.githubusercontent.com/opentable/spur-ioc/master/media/opentable-engineering.png" alt="OpenTable | Engineering" title="OpenTable | Engineering" align="right" />
-    </a>
-</div>
+<img src="https://opentable.github.io/spur/logos/Spur-IoC.png?rand=1" width="100%" alt="Spur: IoC" />
 
-Dependency Injection Framework for [Node.js](http://nodejs.org/).
-
-The project is still a work in progress. We are in the middle of making adjustments and are starting to dogfood the module in our own applications.
+Dependency Injection library for [Node.js](http://nodejs.org/).
 
 [![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
 [![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc)
@@ -196,7 +189,3 @@ $ npm test
 # License
 
 [MIT](LICENSE)
-
-# Changelog
-
-  * Initial commit and alpha release
