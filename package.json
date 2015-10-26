@@ -41,7 +41,7 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "coffee-script": "1.9.0",
+    "coffee-script": "1.9.1",
     "lodash": "2.4.1",
     "require-all": "^1.0.0",
     "stack-filter": "^1.0.0"
