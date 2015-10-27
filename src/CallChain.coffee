@@ -26,7 +26,4 @@ class CallChain
     else
       path += @name
 
-
-
-
 module.exports = CallChain

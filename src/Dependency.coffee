@@ -20,6 +20,4 @@ class Dependency
     dep.instance = instance
     dep
 
-
-
 module.exports = Dependency
