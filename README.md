@@ -10,9 +10,7 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
 - [Features](#features)
 - [Quick start](#quick-start)
 - [API Reference](API.md)
-- [Examples](#examples)
-    - [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
-    - [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
+- [Usage](#usage)
 - [What is inversion of control and why you should use it?](#what-is-inversion-of-control-and-why-you-should-use-it)
 - [Development](#development)
     - [Testing](#testing)
@@ -32,7 +30,7 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
   * Resolution of dependencies by querying via regular expresion
   * Clear error stack trace reporting
 
-# Example
+# Usage
 
 ```bash
 $ npm install spur-ioc --save
