@@ -8,10 +8,11 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
 # Topics
 
 - [Features](#features)
-- [Quick start](#quick-start)
-- [API Reference](API.md)
-- [Usage](#usage)
 - [What is inversion of control and why you should use it?](#what-is-inversion-of-control-and-why-you-should-use-it)
+- [Quick start](#quick-start)
+    - [Usage](#usage)
+    - [Writing tests](#writing-tests)
+- [API Reference](API.md)
 - [Development](#development)
     - [Testing](#testing)
     - [Styleguide](#styleguide)
@@ -30,7 +31,19 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
   * Resolution of dependencies by querying via regular expresion
   * Clear error stack trace reporting
 
-# Usage
+# What is inversion of control and why you should use it?
+
+[Inversion of Control (IoC)](http://en.wikipedia.org/wiki/Inversion_of_control) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory. In short, the dependency is pushed to the class from the outside. All that means is that you shouldn't instantiate dependencies from inside the class.
+
+Inversion of control is used to increase modularity of the program and make it extensible, and has applications in object-oriented programming and other programming paradigms.
+
+It allows for the creation of cleaner and more modular code that is easier to develop, test and maintain:
+
+* Single responsibility classes
+* Easier mocking of objects for test fixtures
+* Easier debugging in Node.js' async environment
+
+# Quick start
 
 ## Installation
 
@@ -38,7 +51,7 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
 $ npm install spur-ioc --save
 ```
 
-### Files
+## Usage
 
 Here is a quick example that sets up the definition of an injector, some dependencies and a startup script.
 
@@ -106,24 +119,28 @@ injector().inject(function(TasksPrinter){
   TasksPrinter.print();
 });
 ```
-# Testing
+## Writing tests
 
 Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
 
-In test/unit/TasksPrinterSpec.coffee
+#### `test/unit/src/TasksPrinterSpec.coffee`
+
+The tests examples are in coffee-script because the syntax of coffee script makes this code much lighter and easier to read and maintain.
 
 ```coffeescript
 injector = require "../../lib/injector"
+
 describe "TasksPrinter", ->
   beforeEach ->
-    @mockConsole =
-        logs:[]
-        log:()-> @logs.push(arguments)
+    @mockConsole = {
+      logs:[],
+      log:()-> @logs.push(arguments)
+    }
 
     #below we replace the console dependency silently
     injector()
-        .addDependency("console", @mockConsole, true)
-        .inject (@TasksPrinter)=>
+      .addDependency("console", @mockConsole, true)
+      .inject (@TasksPrinter)=>
 
   it "should exist", ->
     expect(@TasksPrinter).to.exist
@@ -139,7 +156,7 @@ describe "TasksPrinter", ->
 
 One of the great things about ioc is that you get real application dependency errors upfront at startup
 
-Missing dependency with typo
+#### Missing dependency with typo
 
 ```javascript
 module.exports = function(TaskZ, console){
@@ -150,7 +167,7 @@ module.exports = function(TaskZ, console){
 // ERROR Missing Dependency TaskZ in  $$demo -> TasksPrinter -> TaskZ
 ```
 
-Adding a cyclic dependency back to TasksPrinter in Tasks.js
+#### Adding a cyclic dependency back to TasksPrinter in Tasks.js
 
 ```javascript
 module.exports = function(_, TasksPrinter){
@@ -167,18 +184,6 @@ In order to illustrate how to use Spur IoC, we created sample apps in both Coffe
 
  * [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
  * [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
-
-# What is inversion of control and why you should use it?
-
-[Inversion of Control (IoC)](http://en.wikipedia.org/wiki/Inversion_of_control) is also known as Dependency Injection (DI). IoC is a pattern in which objects define their external dependencies through constructor arguments or the use of a container factory. In short, the dependency is pushed to the class from the outside. All that means is that you shouldn't instantiate dependencies from inside the class.
-
-Inversion of control is used to increase modularity of the program and make it extensible, and has applications in object-oriented programming and other programming paradigms.
-
-It allows for the creation of cleaner and more modular code that is easier to develop, test and maintain:
-
-* Single responsibility classes
-* Easier mocking of objects for test fixtures
-* Easier debugging in Node.js' async environment
 
 # Development
 
