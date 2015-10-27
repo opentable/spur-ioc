@@ -9,7 +9,6 @@ class DependencyManagement
   privateInjectorName:()->
     "$$"+@name
 
-
   resolveExposedDependencies:()->
     @injectAndReturn @exposedDeps
 
@@ -29,7 +28,4 @@ class DependencyManagement
     @addResolvableDependency(name, fn, true)
     @resolveDependency(name)
 
-
 module.exports = DependencyManagement
-
-

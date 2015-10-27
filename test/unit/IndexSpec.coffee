@@ -1,8 +1,7 @@
-Injector = require "#{srcDir}/Injector"
+Injector      = require "#{srcDir}/Injector"
 InjectorIndex = require "../../index.js"
 
 describe "Injector Index", ->
-
 
   it "should exist", ->
     expect(Injector).to.exist

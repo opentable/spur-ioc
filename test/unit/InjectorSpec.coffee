@@ -32,6 +32,7 @@ describe "Injector", ->
       a:"a_updated"
       c:"c"
     })
+
     @injector1
       .merge(@injector2)
       .inject (a,b,c, $injector)->
@@ -46,6 +47,7 @@ describe "Injector", ->
       expect([a,b,c]).to.deep.equal [
         "a_updated", "b", "c"
       ]
+
       expect($injector.getRegex(/./)).to.deep.equal {
         a: 'a_updated', b: 'b', c: 'c'
       }
@@ -59,16 +61,15 @@ describe "Injector", ->
       }
 
     @injector1.inject ($injector)->
-
       expect($injector.getMap(["a", "b"])).to.deep.equal {
         a: 'a_updated', b: 'b'
       }
 
     @injector1.inject ($injector)->
-
       expect($injector.getMap(["a", "b"])).to.deep.equal {
         a: 'a_updated', b: 'b'
       }
+
     DependencyResolver::throwError = ->
 
     @injector1.inject ($injector)->
@@ -83,7 +84,9 @@ describe "Injector", ->
     @injector1.addResolvableDependency "b", (a)->
     @injector1.inject ($injector)->
       $injector.get "a"
+
     cyclicError = @injector1.resolver.errors[0]
+
     expect(cyclicError.error).to.equal "Cyclic Dependency"
     expect(cyclicError.callChain.getPath())
       .to.equal "$$injector1 -> $injector -> a -> b -> a"
@@ -166,8 +169,3 @@ describe "Injector", ->
         expect($injector.getAll()).to.deep.equal {
           c: 'c', a: 'a', b: 'b'
         }
-
-
-
-
-

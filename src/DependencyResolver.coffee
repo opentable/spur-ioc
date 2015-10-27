@@ -1,5 +1,5 @@
 CallChain   = require "./CallChain"
-Dependency   = require "./Dependency"
+Dependency  = require "./Dependency"
 _           = require "lodash"
 stackFilter = require "stack-filter"
 
@@ -45,7 +45,6 @@ class DependencyResolver
     resolver = new DependencyResolver(container, name, logger)
     resolver.resolve()
     resolver
-
 
   resolveArray:(deps, callChain)->
     instances = []
@@ -142,6 +141,5 @@ class DependencyResolver
       @throwError()
     @resolvingFinished = true
     @dependency
-
 
 module.exports = DependencyResolver

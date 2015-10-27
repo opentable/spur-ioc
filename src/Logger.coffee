@@ -1,4 +1,3 @@
-
 class Level
 
   constructor:(@level, @name, @ascii, @exit = false)->
@@ -29,6 +28,5 @@ class Logger
 
       do (levelName, level)=>
         @[levelName] = level.log
-
 
 module.exports = Logger

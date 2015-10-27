@@ -16,5 +16,4 @@ class Injector extends Module
   @create:(name, logger)->
     new Injector(name, logger)
 
-
 module.exports = Injector
