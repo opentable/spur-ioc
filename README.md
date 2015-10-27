@@ -32,11 +32,17 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
 
 # Usage
 
+## Installation
+
 ```bash
 $ npm install spur-ioc --save
 ```
 
-Then: Define lib/injector.js
+### Files
+
+Here is a quick example that sets up the definition of an injector, some dependencies and a startup script.
+
+#### `src/injector.js`
 
 ```javascript
 var spur = require("spur-ioc");
@@ -63,21 +69,23 @@ module.exports = function(){
 }
 ```
 
-Example auto injection in lib/demo/Tasks.js
+#### `src/demo/Tasks.js`
+
+Example of file that depends on an injectable dependency. This example shows the usage of underscore (_).
 
 ```javascript
-// underscore auto injected by name
-// Tasks becomes a dependency itself
 module.exports = function(_){
     return _.map([1,2,3], function(num) {
         return "Task " + num
     });
 }
 ```
-Then in lib/demo/TasksPrinter.js
+
+#### `src/demo/TasksPrinter.js`
+
+This example injects Tasks and console dependencies, both previously defiled in the injector.
 
 ```javascript
-// Tasks and console autoinjected
 module.exports = function(Tasks, console){
     return {
         print:function(){
@@ -87,14 +95,15 @@ module.exports = function(Tasks, console){
 }
 ```
 
-Then to run the app, create lib/start.js
+#### `src/start.js`
+
+Example of how to create an instance of the injector and start the app by using one of its dependencies.
 
 ```javascript
 var injector = require("./injector");
 
 injector().inject(function(TasksPrinter){
   TasksPrinter.print();
-  // prints ["Task 1", "Task 2", "Task 3"]
 });
 ```
 # Testing
