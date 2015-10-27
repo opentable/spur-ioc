@@ -13,12 +13,8 @@ Dependency Injection library for [Node.js](http://nodejs.org/).
     - [Usage](#usage)
     - [Writing tests](#writing-tests)
 - [API Reference](API.md)
-- [Development](#development)
-    - [Testing](#testing)
-    - [Styleguide](#styleguide)
-- [License](#license)
-- [Changelog](#changelog)
 - [Contributing](#contributing)
+- [License](#license)
 
 # Features
 
@@ -152,7 +148,14 @@ describe "TasksPrinter", ->
     ]
 ```
 
-# Error reporting
+## More Examples
+
+In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
+
+ * [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
+ * [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
+
+## Error reporting
 
 One of the great things about ioc is that you get real application dependency errors upfront at startup
 
@@ -178,20 +181,24 @@ module.exports = function(_, TasksPrinter){
 // ERROR Cyclic Dependency TasksPrinter in  $$demo -> TasksPrinter -> Tasks -> TasksPrinter
 ```
 
-# More Examples
+# Contributing
 
-In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
+## We accept Pull Requests
 
- * [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
- * [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
+Please send in pull requests and they will be reviewed in a timely manner. Please review this [generic guide to submitting a good pull requests](https://github.com/blog/1943-how-to-write-the-perfect-pull-request). The only things we ask in addition are the following:
 
-# Development
+ * Please submit small pull requests
+ * Provide a good description of the changes
+ * Code changes must include tests
+ * Be nice to each other in comments. :innocent:
 
-...
+## Style guide
 
-## Running the tests Testing
+The majority of the settings are controlled using an [EditorConfig](.editorconfig) configuration file. To use it [please download a plugin](http://editorconfig.org/#download) for your editor of choice.
 
-To run the test suite, first install the dependancies, then run `npm test`:
+## All tests should pass
+
+To run the test suite, first install the dependancies, then run `npm test`
 
 ```bash
 $ npm install
@@ -201,3 +208,4 @@ $ npm test
 # License
 
 [MIT](LICENSE)
+
