@@ -98,8 +98,8 @@ describe "Injector", ->
       "_":"lodash"
       "chai":"chai"
     }).inject (_, chai)=>
-      expect(_.groupBy).to.exist()
-      expect(chai.Assertion).to.exist()
+      expect(_.groupBy).to.exist
+      expect(chai.Assertion).to.exist
       expect(@warningMessage).to.equal(
         "registerLibraries is deprecated, use registerDependencies with explicit require instead.")
 
