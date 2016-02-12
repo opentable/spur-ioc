@@ -1,6 +1,6 @@
-requireAll             = require "require-all"
-path                   = require "path"
-_                      = require "lodash"
+requireAll = require "require-all"
+path       = require "path"
+_          = require "lodash"
 
 class RegistrationManagement
 

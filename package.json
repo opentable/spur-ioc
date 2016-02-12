@@ -42,14 +42,14 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "coffee-script": "1.9.1",
-    "lodash": "2.4.1",
-    "require-all": "^1.0.0",
-    "stack-filter": "^1.0.0"
+    "coffee-script": "^1.10.0",
+    "lodash": "^4.3.0",
+    "require-all": "^2.0.0",
+    "stack-filter": "^1.0.1"
   },
   "devDependencies": {
-    "mocha": "^2.0.1",
-    "chai": "^1.10.0",
-    "sinon": "^1.12.1"
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
   }
 }
