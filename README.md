@@ -3,7 +3,7 @@
 Dependency Injection library for [Node.js](http://nodejs.org/).
 
 [![NPM version](https://badge.fury.io/js/spur-ioc.png)](http://badge.fury.io/js/spur-ioc)
-[![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc)
+[![Build Status](https://travis-ci.org/opentable/spur-ioc.png?branch=master)](https://travis-ci.org/opentable/spur-ioc) [![Coverage Status](https://coveralls.io/repos/github/opentable/spur-ioc/badge.svg?branch=master)](https://coveralls.io/github/opentable/spur-ioc?branch=master)
 
 # About the Spur Framework
 
