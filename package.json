@@ -31,7 +31,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "mocha --opts ./test/mocha.opts ./test/"
+    "test": "mocha --opts ./test/mocha.opts ./test/ && istanbul report text-summary lcov"
   },
   "bugs": {
     "url": "https://github.com/opentable/spur-ioc/issues"
@@ -52,6 +52,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3"
   }
