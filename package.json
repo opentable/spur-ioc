@@ -16,6 +16,9 @@
       "email": "phoey1@gmail.com"
     }
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "spur",
     "spur-framework",
