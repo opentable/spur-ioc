@@ -1,4 +1,2 @@
 --require ./test/globals.js
---compilers coffee:coffee-script/register
---require coffee-coverage/register-istanbul
 --recursive
