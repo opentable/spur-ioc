@@ -8,6 +8,7 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "babel-node --debug node_modules/mocha/bin/_mocha ./test/",
+    "precoveralls": "npm run lint",
     "coveralls": "babel-node node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha --report lcovonly ./test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "contributors": [
