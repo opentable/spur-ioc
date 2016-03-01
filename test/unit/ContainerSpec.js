@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Injector from "../../dist/Injector"
+import Injector from "../../src/Injector"
 
 describe("injector - Container Management", () => {
   beforeEach(function() {

@@ -1,5 +1,5 @@
-import Injector from "../../dist/Injector"
-import DependencyResolver from "../../dist/DependencyResolver"
+import Injector from "../../src/Injector"
+import DependencyResolver from "../../src/DependencyResolver"
 
 describe("Injector", () => {
   beforeEach(function() {
