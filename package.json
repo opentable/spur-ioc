@@ -39,10 +39,6 @@
     "dependency injection",
     "container"
   ],
-  "files": [
-    "dist",
-    "API.md"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/opentable/spur-ioc/issues"
