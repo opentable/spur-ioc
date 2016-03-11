@@ -1,8 +1,8 @@
 import chalk from "chalk"
 
 class CallChain {
-  constructor(name1, parent) {
-    this.name = name1
+  constructor(name, parent) {
+    this.name = name
     this.parent = parent
   }
 
