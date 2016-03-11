@@ -16,10 +16,9 @@ export default {
   },
 
   registerLibMap(libs) {
-    let name, lib
-    for (name in libs) {
+    for (const name in libs) {
       if (libs.hasOwnProperty(name)) {
-        lib = libs[name]
+        const lib = libs[name]
         if (_.isFunction(lib)) {
           this.addResolvableDependency(name, lib)
         } else if (_.isObject(lib)) {
@@ -39,10 +38,9 @@ export default {
     this.logger.warn(
       "registerLibraries is deprecated, use registerDependencies with explicit require instead."
     )
-    let name, lib
-    for (name in libraries) {
+    for (const name in libraries) {
       if (libraries.hasOwnProperty(name)) {
-        lib = libraries[name]
+        const lib = libraries[name]
         this.addDependency(name, require(lib))
       }
     }
@@ -50,10 +48,9 @@ export default {
   },
 
   registerDependencies(dependencies) {
-    let name, lib
-    for (name in dependencies) {
+    for (const name in dependencies) {
       if (dependencies.hasOwnProperty(name)) {
-        lib = dependencies[name]
+        const lib = dependencies[name]
         this.addDependency(name, lib)
       }
     }

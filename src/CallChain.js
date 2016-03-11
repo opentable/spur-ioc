@@ -23,6 +23,7 @@ class CallChain {
     if (parent) {
       return parent.hasParentName(this.name)
     }
+    return false
   }
 
   getHighlightedName() {

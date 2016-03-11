@@ -6,7 +6,7 @@ export default {
 
   warnIfNeeded(name) {
     if (this.hasDependency(name)) {
-      return this.logger.warn(`warning: ${name} dependency is being overwritten in ${this.name} injector`)
+      this.logger.warn(`warning: ${name} dependency is being overwritten in ${this.name} injector`)
     }
   },
 
@@ -48,11 +48,10 @@ export default {
   },
 
   merge(otherInjector, suppressWarning = false) {
-    let name, dependency
     const dependencies = otherInjector.dependencies
-    for (name in dependencies) {
+    for (const name in dependencies) {
       if (dependencies.hasOwnProperty(name)) {
-        dependency = dependencies[name]
+        const dependency = dependencies[name]
         this.addConstructedDependency(name, dependency, suppressWarning)
       }
     }

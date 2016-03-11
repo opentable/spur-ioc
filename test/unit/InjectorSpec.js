@@ -19,8 +19,6 @@ describe("Injector", () => {
   })
 
   it("multi injector", function() {
-    let cyclicError, error
-
     this.injector1 = this.injector
     this.injector2 = Injector.create("injector2")
     this.injector1.registerDependencies({
@@ -71,7 +69,7 @@ describe("Injector", () => {
     DependencyResolver.prototype.throwError = () => {}
 
     this.injector1.inject($injector => expect($injector.get("missing")).to.equal(null))
-    error = this.injector1.resolver.errors[0]
+    const error = this.injector1.resolver.errors[0]
     console.log(error)
 
     expect(error.error).to.equal("Missing Dependency")
@@ -81,7 +79,7 @@ describe("Injector", () => {
     this.injector1.addResolvableDependency("b", (a) => {}) // eslint-disable-line no-unused-vars
     this.injector1.inject($injector => $injector.get("a"))
 
-    cyclicError = this.injector1.resolver.errors[0]
+    const cyclicError = this.injector1.resolver.errors[0]
     expect(cyclicError.error).to.equal("Cyclic Dependency")
     expect(cyclicError.callChain.getPath()).to.equal("$$injector1 -> $injector -> a -> b -> a")
   })
