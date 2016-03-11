@@ -35,7 +35,12 @@ class CallChain {
     if (this.parent) {
       path = `${this.parent.getPath()} -> `
     }
-    return (path += (highlight ? this.getHighlightedName() : this.name))
+    if (highlight) {
+      path += this.getHighlightedName()
+    } else {
+      path += this.name
+    }
+    return path
   }
 }
 
