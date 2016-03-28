@@ -1,0 +1,6 @@
+{
+  "extends": "opentable",
+  "rules": {
+    "max-len": 0
+  }
+}

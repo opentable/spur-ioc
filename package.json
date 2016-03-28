@@ -2,9 +2,14 @@
   "name": "spur-ioc",
   "description": "Dependency Injection library for Node.js",
   "version": "0.1.3",
-  "author": {
-    "name": "Siavash Etemadieh",
-    "email": "ssetem@googlemail.com"
+  "scripts": {
+    "build": "babel src -d dist",
+    "dev": "babel --watch src -d dist",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "babel-node --debug node_modules/mocha/bin/_mocha ./test/",
+    "precoveralls": "npm run lint",
+    "coveralls": "babel-node node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha --report lcovonly ./test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "contributors": [
     {
@@ -14,8 +19,13 @@
     {
       "name": "Joseph McElroy",
       "email": "phoey1@gmail.com"
+    },
+    {
+      "name": "Timmy Willison",
+      "email": "timmywillisn@gmail.com"
     }
   ],
+  "main": "dist/Injector.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
@@ -30,9 +40,6 @@
     "container"
   ],
   "license": "MIT",
-  "scripts": {
-    "test": "mocha --opts ./test/mocha.opts ./test/ && istanbul report text-summary lcov"
-  },
   "bugs": {
     "url": "https://github.com/opentable/spur-ioc/issues"
   },
@@ -45,17 +52,22 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
+    "chalk": "^1.1.1",
     "coffee-script": "^1.10.0",
     "lodash": "^4.3.0",
     "require-all": "^2.0.0",
     "stack-filter": "^1.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-es2015-loose": "^7.0.0",
     "chai": "^3.5.0",
-    "coffee-coverage": "^1.0.1",
     "coveralls": "^2.11.6",
-    "istanbul": "^0.4.2",
+    "eslint": "^2.4.0",
+    "eslint-config-opentable": "^2.0.1",
+    "isparta": "^4.0.0",
     "mocha": "^2.4.5",
-    "sinon": "^1.17.3"
+    "mocha-lcov-reporter": "^1.2.0"
   }
 }

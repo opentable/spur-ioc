@@ -202,6 +202,8 @@ Please send in pull requests and they will be reviewed in a timely manner. Pleas
 
 The majority of the settings are controlled using an [EditorConfig](.editorconfig) configuration file. To use it [please download a plugin](http://editorconfig.org/#download) for your editor of choice.
 
+Lint source code by running `npm run lint`.
+
 ## All tests should pass
 
 To run the test suite, first install the dependancies, then run `npm test`
@@ -209,6 +211,12 @@ To run the test suite, first install the dependancies, then run `npm test`
 ```bash
 $ npm install
 $ npm test
+```
+
+## Watch files and rebuild on change
+
+```bash
+$ npm run dev
 ```
 
 # License
