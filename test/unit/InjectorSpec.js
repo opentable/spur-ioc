@@ -105,7 +105,7 @@ describe('Injector', () => {
       chai: 'chai'
     });
     this.injector.addResolvableDependency('foo', $injector => setTimeout(() => {
-      expect(() => $injector.get('chai')).to.throw('cannot use $injector.get("chai") asynchronously');
+      expect(() => $injector.get('chai')).to.throw('cannot use $injector.get(\'chai\') asynchronously');
       expect(() => $injector.getRegex(/.+/)).to.throw('cannot use $injector.getRegex(/.+/) asynchronously');
       done();
     }, 0));
