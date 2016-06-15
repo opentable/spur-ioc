@@ -7,12 +7,12 @@ node_js:
 - '5'
 - '6'
 script: npm run coveralls
-deploy:
-  provider: npm
-  email: timmywillisn@gmail.com
-  skip_cleanup: true
-  api_key:
-    secure: C3yyLO5apdzqil1YYU1SFAbdD06QrHKlbUe44bdOFc5pGPEXCUevqaL6vBMAceRpOa1rQOWVpddaWTsQlzUV61EACGPg2k1ZcNuhXHOS7MrZgAFrhlHh2euCjnP4lfjP86kplcDjj0WwTqV7Zjx0UefXYAnp6mg6Rfoi5N8ZLr1WwFYNsYN6anyowv16ix1goldN3Su71ukfRp/gOZxBGsuIlsnIjD9sxctsnWIix8eOpFV3JeQip5GngdMmmX4oMcRxyAW+mf3he40WHdMMZK/YvI9Q0WtQKYa7YHZnDMa4XvqlOTl8JyIouc6TkXrEqQq7nl13fYEAgUxXfZymHUa2B/yQ/EyKYNZXIxVIWN6ZrioRFszI/gGqfBBB81nNMI4+7uDUahLMHzwS2Yq14enzlyn5kub+iYDedUjw5LuMbK8d0NthrNywgcMaieJJqPGChYddAl6KFeAsMbHPSmKop/KvUG1x8DmmMpBAxm0RCW+LDrih0stZRqE0o1ilZSpJCdTm3pNjE7uaQjHUnzvrCLBzirRb/FG9Zq/n9M2LGeKkfR711Ru0JWNZH2mJMMRvJIGt3bseQN4koGNFiZl8nttfQi/HeDYtYdfdHVqqm5V/CdrEEAcQesA2VwaUAaNxMN+6YRia3AySqyDrwaTSo0Jvcw+pnC7faWYW/Qk=
-  on:
-    tags: true
-    repo: opentable/spur-ioc
+# deploy:
+#   provider: npm
+#   email: timmywillisn@gmail.com
+#   skip_cleanup: true
+#   api_key:
+#     secure: C3yyLO5apdzqil1YYU1SFAbdD06QrHKlbUe44bdOFc5pGPEXCUevqaL6vBMAceRpOa1rQOWVpddaWTsQlzUV61EACGPg2k1ZcNuhXHOS7MrZgAFrhlHh2euCjnP4lfjP86kplcDjj0WwTqV7Zjx0UefXYAnp6mg6Rfoi5N8ZLr1WwFYNsYN6anyowv16ix1goldN3Su71ukfRp/gOZxBGsuIlsnIjD9sxctsnWIix8eOpFV3JeQip5GngdMmmX4oMcRxyAW+mf3he40WHdMMZK/YvI9Q0WtQKYa7YHZnDMa4XvqlOTl8JyIouc6TkXrEqQq7nl13fYEAgUxXfZymHUa2B/yQ/EyKYNZXIxVIWN6ZrioRFszI/gGqfBBB81nNMI4+7uDUahLMHzwS2Yq14enzlyn5kub+iYDedUjw5LuMbK8d0NthrNywgcMaieJJqPGChYddAl6KFeAsMbHPSmKop/KvUG1x8DmmMpBAxm0RCW+LDrih0stZRqE0o1ilZSpJCdTm3pNjE7uaQjHUnzvrCLBzirRb/FG9Zq/n9M2LGeKkfR711Ru0JWNZH2mJMMRvJIGt3bseQN4koGNFiZl8nttfQi/HeDYtYdfdHVqqm5V/CdrEEAcQesA2VwaUAaNxMN+6YRia3AySqyDrwaTSo0Jvcw+pnC7faWYW/Qk=
+#   on:
+#     tags: true
+#     repo: opentable/spur-ioc
