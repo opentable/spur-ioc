@@ -9,7 +9,8 @@
     "pretest": "npm run lint",
     "test": "babel-node --debug node_modules/mocha/bin/_mocha ./test/",
     "precoveralls": "npm run lint",
-    "coveralls": "babel-node node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha --report lcovonly ./test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "babel-node node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha --report lcovonly ./test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "build-and-test": "npm run build && npm test"
   },
   "contributors": [
     {
@@ -65,7 +66,8 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.6",
     "eslint": "^2.4.0",
-    "eslint-config-opentable": "^2.0.1",
+    "eslint-config-spur": "0.0.2",
+    "eslint-plugin-import": "^1.8.1",
     "isparta": "^4.0.0",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0"
