@@ -15,6 +15,7 @@ class Level {
   }
 
   log(...args) {
+    // eslint-disable-next-line no-console
     return console.log.apply(console, [this.ascii].concat(args));
   }
 }

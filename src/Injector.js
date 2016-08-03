@@ -1,5 +1,6 @@
 // Register coffeescript for any CS dependencies
 import 'coffee-script/register';
+
 import _ from 'lodash';
 import Logger from './Logger';
 import ContainerManagement from './ContainerManagement';

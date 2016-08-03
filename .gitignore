@@ -8,4 +8,6 @@
 node_modules/
 bower_components/
 /coverage
-dist
+/dist
+/lib
+.DS_Store*

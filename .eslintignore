@@ -1,2 +1,4 @@
 dist/**/*.js
+lib/**/*.js
+coverage/*
 test/fixtures/**/*.js

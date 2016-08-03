@@ -32,6 +32,7 @@ describe('injector - Container Management', () => {
     this.injector.addResolvableDependency('missing', (nothing, $injector) => {});
     this.injector.addDependency('punct', '!');
     this.injector.addDependency('_', require('lodash')); // eslint-disable-line global-require
+
     expect(() => this.injector.inject(foo => console.log(foo))).to.throw('Resolver encountered errors');
   });
 });

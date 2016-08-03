@@ -7,11 +7,6 @@ describe('Injector', () => {
     this.injector = Injector.create('injector1');
   });
 
-  it('should exist', function () {
-    expect(Injector).to.exist;
-    expect(this.injector).to.exist;
-  });
-
   it('inject', function () {
     this.injector.registerFolders(__dirname, ['../fixtures']);
     this.injector.inject((House) =>
@@ -19,7 +14,7 @@ describe('Injector', () => {
     );
   });
 
-  it('multi injector', function () {
+  it('multi-injector', function () {
     this.injector1 = this.injector;
     this.injector2 = Injector.create('injector2');
     this.injector1.registerDependencies({
@@ -109,7 +104,9 @@ describe('Injector', () => {
       expect(() => $injector.getRegex(/.+/)).to.throw('cannot use $injector.getRegex(/.+/) asynchronously');
       done();
     }, 0));
-    this.injector.inject((_, chai, $injector, foo) => {}); // eslint-disable-line no-unused-vars
+
+    // eslint-disable-nextline no-unused-vars
+    this.injector.inject((_, chai, $injector, foo) => {});
   });
 
   describe('expose and link', () => {

@@ -1,14 +1,22 @@
 {
-  "extends": "spur",
+  "extends": "../.eslintrc",
   "env": {
     "es6": true,
     "mocha": true,
     "node": true,
     "jasmine": true
   },
+  "globals": {
+    "sinon": true,
+    "injector": true,
+    "testServer": true,
+    "nock": true,
+    "_": true
+  },
   "rules": {
     "no-unused-expressions": 0,
     "max-len": 0,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "no-console": 0
   }
 }
