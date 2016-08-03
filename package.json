@@ -13,7 +13,7 @@
     "test-unit-legacy": "babel-node --debug node_modules/mocha/bin/_mocha ./test/legacy/",
     "test-integration": "babel-node --debug node_modules/mocha/bin/_mocha ./test/integration/",
     "test": "npm run test-unit && npm run test-unit-legacy && npm run test-integration",
-    "coverage": "babel-node node_modules/isparta/bin/isparta cover --report text --report html node_modules/mocha/bin/_mocha -- --report lcovonly ./test/unit/",
+    "coverage": "babel-node node_modules/isparta/bin/isparta cover --report text --report html ./node_modules/mocha/bin/_mocha --report lcovonly -- ./test/unit/",
     "precoveralls": "npm run build && npm run lint && npm run test-unit-legacy && npm run test-integration",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "build-and-test": "npm run build && npm test"
