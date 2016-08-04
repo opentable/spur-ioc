@@ -1,3 +1,4 @@
+.DS_Store*
 .eslintrc
 .eslintignore
 
@@ -6,6 +7,4 @@
 /.travis.yml
 /.npmignore
 
-/src
-/test
 /coverage
