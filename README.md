@@ -110,7 +110,7 @@ module.exports = function(Tasks, console){
 }
 ```
 
-#### `src/start.js`
+#### `src/start.js` (top declaration file)
 
 Example of how to create an instance of the injector and start the app by using one of its dependencies.
 
@@ -121,6 +121,19 @@ injector().inject(function(TasksPrinter){
   TasksPrinter.print();
 });
 ```
+
+##### Usage note for ES6 syntax
+
+While it is tempting to utilize the fat arrow syntax in this top declaration file like the example below, it will not be supported by spur-ioc. For more information, read issue [#26](https://github.com/opentable/spur-ioc/issues/26). Instead use the recommended approach above. There isn't a compelling reason to add that additional support. If you use this style, it will break as the report in issue #26.
+
+```javascript
+var injector = require("./injector");
+
+injector().inject((TasksPrinter) => {
+  TasksPrinter.print();
+});
+```
+
 ## Writing tests
 
 Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
@@ -222,4 +235,3 @@ $ npm run dev
 # License
 
 [MIT](LICENSE)
-
