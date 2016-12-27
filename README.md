@@ -98,7 +98,7 @@ module.exports = function(_){
 
 #### `src/demo/TasksPrinter.js`
 
-This example injects Tasks and console dependencies, both previously defiled in the injector.
+This example injects Tasks and console dependencies, both previously defined in the injector.
 
 ```javascript
 module.exports = function(Tasks, console){
