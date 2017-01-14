@@ -229,6 +229,8 @@ $ npm install
 $ npm test
 ```
 
+> Requires Node 4+ for dev tools, but we recommend using Node 6.
+
 ## Watch files and rebuild on change
 
 ```bash
