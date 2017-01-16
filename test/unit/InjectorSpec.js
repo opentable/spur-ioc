@@ -9,9 +9,9 @@ describe('Injector', () => {
 
   it('inject', function () {
     this.injector.registerFolders(__dirname, ['../fixtures']);
-    this.injector.inject((House) =>
-      expect(House).to.equal('House with Pitched Roof and Barn Doors and Double GlazedWindows and Long Garden')
-    );
+    this.injector.inject((House) => {
+      expect(House).to.equal('House with Pitched Roof and Barn Doors and Double GlazedWindows and Long Garden');
+    });
   });
 
   it('multi-injector', function () {

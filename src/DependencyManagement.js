@@ -15,7 +15,7 @@ export default {
 
   injectAndReturn(deps) {
     let resolvedDeps = null;
-    this.inject($injector => {
+    this.inject(($injector) => {
       resolvedDeps = deps instanceof RegExp
         ? $injector.getRegex(deps)
         : $injector.getMap(deps);

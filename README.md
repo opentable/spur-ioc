@@ -32,8 +32,9 @@ The Spur Framework is a collection of commonly used Node.JS libraries used to cr
   * Ability to link injectors
   * Makes testing super easy
     * Ability to substitute dependencies in tests
-  * Resolution of dependencies by querying via regular expresion
+  * Resolution of dependencies by querying via regular expression
   * Clear error stack trace reporting
+  * Supports active Node versions in the [LTS Schedule](https://github.com/nodejs/LTS#lts-schedule). ([view current versions](.travis.yml))
 
 # What is inversion of control and why you should use it?
 
@@ -77,7 +78,7 @@ module.exports = function(){
     "nodeProcess" : process
   });
 
-  // register folders in your project to be autoinjected
+  // register folders in your project to be auto-injected
   ioc.registerFolders(__dirname, [
     "demo"
   ]);
@@ -93,7 +94,7 @@ Example of file that depends on an injectable dependency. This example shows the
 ```javascript
 module.exports = function(_){
     return _.map([1,2,3], function(num) {
-        return "Task " + num
+        return "Task " + num;
     });
 }
 ```
@@ -105,8 +106,8 @@ This example injects Tasks and console dependencies, both previously defined in 
 ```javascript
 module.exports = function(Tasks, console){
     return {
-        print:function(){
-            console.log(Tasks)
+        print: function(){
+          console.log(Tasks);
         }
     };
 }
@@ -227,6 +228,8 @@ To run the test suite, first install the dependancies, then run `npm test`
 $ npm install
 $ npm test
 ```
+
+> Requires Node 4+ for dev tools, but we recommend using Node 6.
 
 ## Watch files and rebuild on change
 
