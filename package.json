@@ -14,7 +14,8 @@
     "test-integration": "babel-node --debug node_modules/mocha/bin/_mocha ./test/integration/",
     "test": "npm run test-unit && npm run test-integration",
     "build-and-test": "npm run build && npm test",
-    "preversion": "npm run build-and-test"
+    "preversion": "npm run build-and-test",
+    "prepublish": "npm run test"
   },
   "author": {
     "name": "Agustin Colchado",
