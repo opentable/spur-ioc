@@ -5,7 +5,7 @@
   "main": "lib/Injector.js",
   "jsnext:main": "./src/Injector",
   "scripts": {
-    "build": "babel src -d lib --source-maps",
+    "build": "babel src -d lib",
     "dev": "babel --watch src -d lib",
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -62,13 +62,13 @@
     "stack-filter": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.5.1",
+    "babel-cli": "^6.18.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2015-loose": "^8.0.0",
     "chai": "^3.5.0",
     "eslint": "^3.13.1",
-    "eslint-config-opentable": "^4.0.0",
+    "eslint-config-opentable": "^6.0.0",
     "mocha": "^3.2.0"
   }
 }

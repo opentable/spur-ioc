@@ -2,5 +2,8 @@
   "extends": "opentable",
   "env": {
     "node": true
+  },
+  "rules": {
+    "class-methods-use-this": 0
   }
 }

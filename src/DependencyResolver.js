@@ -1,6 +1,6 @@
-import CallChain from './CallChain';
 import _ from 'lodash';
 import stackFilter from 'stack-filter';
+import CallChain from './CallChain';
 
 class DependencyError {
   constructor(callChain, error, errorObject) {
@@ -86,9 +86,9 @@ class DependencyResolver {
 
   resolveRegex(regex) {
     const deps = _.keys(this.container.dependencies)
-      .filter((key) =>
-        regex.test(key) && key !== '$injector' && key !== this.container.privateInjectorName()
-      );
+      .filter((key) => { // eslint-disable-line
+        return regex.test(key) && key !== '$injector' && key !== this.container.privateInjectorName();
+      });
     return this.resolveMap(deps);
   }
 

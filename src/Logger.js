@@ -15,7 +15,7 @@ class Level {
   }
 
   log(...args) {
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console, prefer-spread
     return console.log.apply(console, [this.ascii].concat(args));
   }
 }
@@ -35,12 +35,12 @@ class Logger {
   }
 
   static create() {
-    return new Logger;
+    return new Logger();
   }
 
   addLoggingMethods() {
     _.each(LEVELS, (value, name) => {
-      if (LEVELS.hasOwnProperty(name)) {
+      if (Object.prototype.hasOwnProperty.call(LEVELS, name)) {
         this[name] = LEVELS[name].log;
       }
     });
