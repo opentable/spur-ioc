@@ -1,5 +1,6 @@
 {
   "presets": ["es2015-loose"],
   "plugins": ["add-module-exports"],
+  "sourceMaps": "both",
   "retainLines": "true"
 }

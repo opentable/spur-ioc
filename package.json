@@ -5,7 +5,7 @@
   "main": "lib/Injector.js",
   "jsnext:main": "./src/Injector",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --source-maps",
     "dev": "babel --watch src -d lib",
     "lint": "eslint .",
     "pretest": "npm run lint",
