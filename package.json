@@ -5,14 +5,16 @@
   "main": "lib/Injector.js",
   "jsnext:main": "./src/Injector",
   "scripts": {
-    "build": "babel src -d lib --source-maps",
-    "dev": "babel --watch src -d lib",
+    "clean": "rm -rf lib/",
+    "build": "npm run clean && babel src -d lib --source-maps",
+    "dev": "npm run clean && babel --watch src -d lib",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test-unit": "babel-node --debug node_modules/mocha/bin/_mocha ./test/unit/",
     "test-integration": "babel-node --debug node_modules/mocha/bin/_mocha ./test/integration/",
     "test": "npm run test-unit && npm run test-integration",
-    "build-and-test": "npm run build && npm test"
+    "build-and-test": "npm run build && npm test",
+    "preversion": "npm run build-and-test"
   },
   "author": {
     "name": "Agustin Colchado",
