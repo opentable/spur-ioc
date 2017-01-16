@@ -73,6 +73,7 @@
     "chai": "^3.5.0",
     "eslint": "^3.13.1",
     "eslint-config-opentable": "^6.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0"
   }
 }
