@@ -1,6 +1,8 @@
 const requireAll = require('require-all');
 const path = require('path');
-const _ = require('lodash');
+const _forEach = require('lodash.foreach');
+const _isFunction = require('lodash.isfunction');
+const _isObject = require('lodash.isobject');
 
 const rfileFilter = /(.+)\.(js|json)$/;
 
@@ -20,12 +22,12 @@ module.exports = {
   },
 
   registerLibMap(libs) {
-    _.each(libs, (value, name) => {
+    _forEach(libs, (value, name) => {
       if (hasOwnProp(libs, name)) {
         const lib = libs[name];
-        if (_.isFunction(lib)) {
+        if (_isFunction(lib)) {
           this.addResolvableDependency(name, lib);
-        } else if (_.isObject(lib)) {
+        } else if (_isObject(lib)) {
           this.registerLibMap(lib);
         }
       }
@@ -34,12 +36,12 @@ module.exports = {
   },
 
   registerFolders(rootDir, dirs) {
-    _.each(dirs, (dir) => this.registerFolder(rootDir, dir));
+    _forEach(dirs, (dir) => this.registerFolder(rootDir, dir));
     return this;
   },
 
   registerDependencies(dependencies) {
-    _.each(dependencies, (value, name) => {
+    _forEach(dependencies, (value, name) => {
       if (hasOwnProp(dependencies, name)) {
         const lib = dependencies[name];
         this.addDependency(name, lib);

@@ -1,9 +1,10 @@
-const _ = require('lodash');
+const _bindAll = require('lodash.bindall');
+const _forEach = require('lodash.foreach');
 const chalk = require('chalk');
 
 class Level {
   constructor(level, name, ascii, exit = false) {
-    _.bindAll(this, 'log');
+    _bindAll(this, 'log');
     this.level = level;
     this.name = name;
     this.ascii = ascii;
@@ -38,7 +39,7 @@ class Logger {
   }
 
   addLoggingMethods() {
-    _.each(LEVELS, (value, name) => {
+    _forEach(LEVELS, (value, name) => {
       if (Object.prototype.hasOwnProperty.call(LEVELS, name)) {
         this[name] = LEVELS[name].log;
       }

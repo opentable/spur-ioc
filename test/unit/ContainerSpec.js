@@ -21,7 +21,7 @@ describe('injector - Container Management', () => {
   it('inject', function () {
 
     this.injector.addResolvableDependency('foo', function (bar, punct, _) {
-      return `${bar} world${punct}${_.VERSION}`;
+      return `${bar} world${punct}`;
     });
 
     this.injector.addResolvableDependency('bar', function (error) {
@@ -54,8 +54,6 @@ describe('injector - Container Management', () => {
     });
 
     this.injector.addDependency('punct', '!');
-
-    this.injector.addDependency('_', require('lodash'));
 
     expect(() => this.injector.inject(function (foo) {
       console.log(foo);
