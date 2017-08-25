@@ -1,4 +1,5 @@
-const _ = require('lodash');
+const _map = require('lodash.map');
+const _compact = require('lodash.compact');
 
 const rnewline = /\n/g;
 const rat = /_at_/g;
@@ -11,7 +12,8 @@ class Util {
       .replace(rnewline, ' ')
       .replace(rat, '')
       .match(rfunction)[1].split(rcomma);
-    return _.compact(_.map(params, (p) => p.trim()));
+
+    return _compact(_map(params, (p) => p.trim()));
   }
 }
 

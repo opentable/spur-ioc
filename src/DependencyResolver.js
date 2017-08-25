@@ -1,4 +1,5 @@
-const _ = require('lodash');
+const _bindAll = require('lodash.bindall');
+const _keys = require('lodash.keys');
 const stackFilter = require('stack-filter');
 const CallChain = require('./CallChain');
 
@@ -54,7 +55,7 @@ class DependencyWarning {
 
 class DependencyResolver {
   constructor(container, name, logger) {
-    _.bindAll(this, 'resolveDependencies', 'resolveRegex');
+    _bindAll(this, 'resolveDependencies', 'resolveRegex');
     this.container = container;
     this.name = name;
     this.logger = logger;
@@ -85,7 +86,7 @@ class DependencyResolver {
   }
 
   resolveRegex(regex) {
-    const deps = _.keys(this.container.dependencies)
+    const deps = _keys(this.container.dependencies)
       .filter((key) => { // eslint-disable-line
         return regex.test(key) && key !== '$injector' && key !== this.container.privateInjectorName();
       });

@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _forEach = require('lodash.foreach');
 const Dependency = require('./Dependency');
 
 const rall = /.+/;
@@ -51,7 +51,7 @@ module.exports = {
   merge(otherInjector, suppressWarning = false) {
     const dependencies = otherInjector.dependencies;
 
-    _.each(dependencies, (value, name) => {
+    _forEach(dependencies, (value, name) => {
       const dependency = dependencies[name];
       this.addConstructedDependency(name, dependency, suppressWarning);
     });

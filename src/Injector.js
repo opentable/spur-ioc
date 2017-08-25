@@ -1,4 +1,5 @@
-const _ = require('lodash');
+const _bindAll = require('lodash.bindall');
+const _assign = require('lodash.assign');
 const Logger = require('./Logger');
 const ContainerManagement = require('./ContainerManagement');
 const DependencyManagement = require('./DependencyManagement');
@@ -6,7 +7,7 @@ const RegistrationManagement = require('./RegistrationManagement');
 
 class Injector {
   constructor(name = 'anonymous_injector', logger = Logger.create()) {
-    _.bindAll(this, 'resolveDependency');
+    _bindAll(this, 'resolveDependency');
     this.name = name;
     this.logger = logger;
     this.dependencies = {};
@@ -17,6 +18,6 @@ class Injector {
   }
 }
 
-_.assign(Injector.prototype, ContainerManagement, DependencyManagement, RegistrationManagement);
+_assign(Injector.prototype, ContainerManagement, DependencyManagement, RegistrationManagement);
 
 module.exports = Injector;
