@@ -7,7 +7,6 @@ const rcomma = /\s*,\s*/;
 
 class Util {
   parseDependencies(fn) {
-    // console.log(fn.toString());
     const params = fn.toString()
       .replace(rnewline, ' ')
       .replace(rat, '')
