@@ -1,3 +1,3 @@
-module.exports = function(WindowType) {
-  return WindowType + "Windows";
+module.exports = function (WindowType) {
+  return WindowType + 'Windows';
 }

@@ -1,3 +1,3 @@
-module.exports = function(){
-  return "Long Garden";
+module.exports = function () {
+  return 'Long Garden';
 }

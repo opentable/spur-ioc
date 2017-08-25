@@ -1,4 +1,4 @@
-import _ from 'lodash';
+const _ = require('lodash');
 
 const rnewline = /\n/g;
 const rat = /_at_/g;
@@ -7,12 +7,13 @@ const rcomma = /\s*,\s*/;
 
 class Util {
   parseDependencies(fn) {
+    // console.log(fn.toString());
     const params = fn.toString()
       .replace(rnewline, ' ')
       .replace(rat, '')
       .match(rfunction)[1].split(rcomma);
-    return _.compact(_.map(params, p => p.trim()));
+    return _.compact(_.map(params, (p) => p.trim()));
   }
 }
 
-export default new Util();
+module.exports = new Util();

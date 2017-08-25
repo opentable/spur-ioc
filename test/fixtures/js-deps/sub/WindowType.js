@@ -1,3 +1,3 @@
-module.exports = function(){
-  return "Double Glazed"
-}
+module.exports = function () {
+  return 'Double Glazed'
+};

@@ -1,6 +1,6 @@
-import DependencyResolver from './DependencyResolver';
+const DependencyResolver = require('./DependencyResolver');
 
-export default {
+module.exports = {
   resolveDependency(name) {
     return (this.resolver = DependencyResolver.resolve(this, name, this.logger));
   },
@@ -15,11 +15,13 @@ export default {
 
   injectAndReturn(deps) {
     let resolvedDeps = null;
-    this.inject(($injector) => {
+
+    this.inject(function ($injector) {
       resolvedDeps = deps instanceof RegExp
         ? $injector.getRegex(deps)
         : $injector.getMap(deps);
     });
+
     return resolvedDeps;
   },
 

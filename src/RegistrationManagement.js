@@ -1,6 +1,6 @@
-import requireAll from 'require-all';
-import path from 'path';
-import _ from 'lodash';
+const requireAll = require('require-all');
+const path = require('path');
+const _ = require('lodash');
 
 const rfileFilter = /(.+)\.(js|json|coffee)$/;
 
@@ -8,7 +8,7 @@ const hasOwnProp = function (source, propertyName) {
   return Object.prototype.hasOwnProperty.call(source, propertyName);
 };
 
-export default {
+module.exports = {
   registerFolder(rootDir, dir) {
     const dirname = path.resolve(rootDir, dir);
     const libs = requireAll({
@@ -34,21 +34,7 @@ export default {
   },
 
   registerFolders(rootDir, dirs) {
-    _.each(dirs, dir => this.registerFolder(rootDir, dir));
-    return this;
-  },
-
-  registerLibraries(libraries) {
-    this.logger.warn(
-      'registerLibraries is deprecated, use registerDependencies with explicit require instead.'
-    );
-
-    _.each(libraries, (value, name) => {
-      if (hasOwnProp(libraries, name)) {
-        const lib = libraries[name];
-        this.addDependency(name, require(lib)); // eslint-disable-line global-require
-      }
-    });
+    _.each(dirs, (dir) => this.registerFolder(rootDir, dir));
     return this;
   },
 

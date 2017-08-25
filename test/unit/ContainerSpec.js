@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import Injector from '../../src/Injector';
+const Injector = require('../../src/Injector');
 
 describe('injector - Container Management', () => {
   beforeEach(function () {
@@ -12,27 +11,55 @@ describe('injector - Container Management', () => {
   });
 
   it('addResolvableDependency', function () {
-    this.injector.addResolvableDependency('foo', (bar) => {});
+    this.injector.addResolvableDependency('foo', function (bar) {});
     const dep = this.injector.getDependency('foo');
     expect(dep.dependencies).to.deep.equal(['bar']);
     expect(dep.name).to.equal('foo');
-    this.injector.addResolvableDependency('foo', bar => console.log(bar));
+    this.injector.addResolvableDependency('foo', function (bar) { console.log(bar); });
   });
 
   it('inject', function () {
-    this.injector.addResolvableDependency('foo', (bar, punct, _) => `${bar} world${punct}${_.VERSION}`);
-    this.injector.addResolvableDependency('bar', error => 'hi');
-    this.injector.addResolvableDependency('error', (error1) => {});
-    this.injector.addResolvableDependency('error1', (error2) => {}).addResolvableDependency('error2', (error3) => {});
-    this.injector.addResolvableDependency('error3', (exception, cyclic, missing) => {});
-    this.injector.addResolvableDependency('exception', () => {
+
+    this.injector.addResolvableDependency('foo', function (bar, punct, _) {
+      return `${bar} world${punct}${_.VERSION}`;
+    });
+
+    this.injector.addResolvableDependency('bar', function (error) {
+      return 'hi';
+    });
+
+    this.injector.addResolvableDependency('error', function (error1) {
+      return {};
+    });
+
+    this.injector.addResolvableDependency('error1', function (error2) {
+      return {};
+    })
+    .addResolvableDependency('error2', function (error3) { return {}; });
+
+    this.injector.addResolvableDependency('error3', function (exception, cyclic, missing) {
+      return {};
+    });
+
+    this.injector.addResolvableDependency('exception', function () {
       throw new Error('Oh no');
     });
-    this.injector.addResolvableDependency('cyclic', (error) => {});
-    this.injector.addResolvableDependency('missing', (nothing, $injector) => {});
-    this.injector.addDependency('punct', '!');
-    this.injector.addDependency('_', require('lodash')); // eslint-disable-line global-require
 
-    expect(() => this.injector.inject(foo => console.log(foo))).to.throw('Resolver encountered errors');
+    this.injector.addResolvableDependency('cyclic', function (error) {
+      return {};
+    });
+
+    this.injector.addResolvableDependency('missing', function (nothing, $injector) {
+      return {};
+    });
+
+    this.injector.addDependency('punct', '!');
+
+    this.injector.addDependency('_', require('lodash'));
+
+    expect(() => this.injector.inject(function (foo) {
+      console.log(foo);
+    }))
+    .to.throw('Resolver encountered errors');
   });
 });

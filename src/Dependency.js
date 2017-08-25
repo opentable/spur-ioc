@@ -1,4 +1,4 @@
-import Util from './Util';
+const Util = require('./Util');
 
 class Dependency {
   constructor(name) {
@@ -19,4 +19,4 @@ class Dependency {
   }
 }
 
-export default Dependency;
+module.exports = Dependency;
