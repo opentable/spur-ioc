@@ -1,6 +1,3 @@
-// Register coffeescript for any CS dependencies
-require('coffee-script/register');
-
 const _ = require('lodash');
 const Logger = require('./Logger');
 const ContainerManagement = require('./ContainerManagement');

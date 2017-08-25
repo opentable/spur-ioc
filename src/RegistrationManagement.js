@@ -2,7 +2,7 @@ const requireAll = require('require-all');
 const path = require('path');
 const _ = require('lodash');
 
-const rfileFilter = /(.+)\.(js|json|coffee)$/;
+const rfileFilter = /(.+)\.(js|json)$/;
 
 const hasOwnProp = function (source, propertyName) {
   return Object.prototype.hasOwnProperty.call(source, propertyName);

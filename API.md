@@ -91,10 +91,10 @@ Given this folder structure
 +-- domain
 |   +-- Book.js
 |   +-- mappers
-|   |   +-- BookMapper.coffee
+|   |   +-- BookMapper.js
 ```
 
-The files `WebServer.js`, `Book.js`, `BookMapper.coffee` will be autoinjected by their filename without extension.
+The files `WebServer.js`, `Book.js`, `BookMapper.js` will be autoinjected by their filename without extension.
 
 #### `module.exports = function(dep1, dep2, ...){...}`
 
@@ -178,20 +178,6 @@ describe("Greeter", function(){
   });
 
 });
-```
-
-##### Example: Unit Testing in coffeescript
-
-```coffeescript
-describe "Greeter", ->
-  beforeEach ->
-    injector().inject (@Greeter)=>
-
-  it "should exist", ->
-    expect(@Greeter).to.exist
-
-  it "should greet correctly", ->
-    expect(@Greeter.greet()).to.equal "Hello World!"
 ```
 
 ---

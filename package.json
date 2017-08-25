@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "coffee-script": "^1.11.1",
     "lodash": "^4.3.0",
     "require-all": "^2.0.0",
     "stack-filter": "^1.0.1"
