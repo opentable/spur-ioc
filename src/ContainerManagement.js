@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import Dependency from './Dependency';
+const _ = require('lodash');
+const Dependency = require('./Dependency');
 
 const rall = /.+/;
 
-export default {
+module.exports = {
 
   warnIfNeeded(name) {
     if (this.hasDependency(name)) {

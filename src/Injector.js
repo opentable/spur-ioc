@@ -1,11 +1,8 @@
-// Register coffeescript for any CS dependencies
-import 'coffee-script/register';
-
-import _ from 'lodash';
-import Logger from './Logger';
-import ContainerManagement from './ContainerManagement';
-import DependencyManagement from './DependencyManagement';
-import RegistrationManagement from './RegistrationManagement';
+const _ = require('lodash');
+const Logger = require('./Logger');
+const ContainerManagement = require('./ContainerManagement');
+const DependencyManagement = require('./DependencyManagement');
+const RegistrationManagement = require('./RegistrationManagement');
 
 class Injector {
   constructor(name = 'anonymous_injector', logger = Logger.create()) {
@@ -22,4 +19,4 @@ class Injector {
 
 _.assign(Injector.prototype, ContainerManagement, DependencyManagement, RegistrationManagement);
 
-export default Injector;
+module.exports = Injector;

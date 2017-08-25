@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import chalk from 'chalk';
+const _ = require('lodash');
+const chalk = require('chalk');
 
 class Level {
   constructor(level, name, ascii, exit = false) {
@@ -15,7 +15,6 @@ class Level {
   }
 
   log(...args) {
-    // eslint-disable-next-line no-console, prefer-spread
     return console.log.apply(console, [this.ascii].concat(args));
   }
 }
@@ -47,4 +46,4 @@ class Logger {
   }
 }
 
-export default Logger;
+module.exports = Logger;

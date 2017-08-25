@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import stackFilter from 'stack-filter';
-import CallChain from './CallChain';
+const _ = require('lodash');
+const stackFilter = require('stack-filter');
+const CallChain = require('./CallChain');
 
 class DependencyError {
   constructor(callChain, error, errorObject) {
@@ -201,4 +201,4 @@ class DependencyResolver {
   }
 }
 
-export default DependencyResolver;
+module.exports = DependencyResolver;

@@ -63,24 +63,24 @@ Here is a quick example that sets up the definition of an injector, some depende
 #### `src/injector.js`
 
 ```javascript
-var spur = require("spur-ioc");
+const spur = require('spur-ioc');
 
 module.exports = function(){
   // define a  new injector
-  var ioc = spur.create("demo");
+  const ioc = spur.create('demo');
 
 
   //register external dependencies or globals
   ioc.registerDependencies({
-    "_"           : require("underscore"),
-    "path"        : require("path"),
-    "console"     : console,
-    "nodeProcess" : process
+    '_'           : require('underscore'),
+    'path'        : require('path'),
+    'console'     : console,
+    'nodeProcess' : process
   });
 
   // register folders in your project to be auto-injected
   ioc.registerFolders(__dirname, [
-    "demo"
+    'demo'
   ]);
 
   return ioc;
@@ -94,7 +94,7 @@ Example of file that depends on an injectable dependency. This example shows the
 ```javascript
 module.exports = function(_){
     return _.map([1,2,3], function(num) {
-        return "Task " + num;
+        return 'Task ' + num;
     });
 }
 ```
@@ -118,7 +118,7 @@ module.exports = function(Tasks, console){
 Example of how to create an instance of the injector and start the app by using one of its dependencies.
 
 ```javascript
-var injector = require("./injector");
+const injector = require('./injector');
 
 injector().inject(function(TasksPrinter){
   TasksPrinter.print();
@@ -130,7 +130,7 @@ injector().inject(function(TasksPrinter){
 While it is tempting to utilize the fat arrow syntax in this top declaration file like the example below, it will not be supported by spur-ioc. For more information, read issue [#26](https://github.com/opentable/spur-ioc/issues/26). Instead use the recommended approach above. There isn't a compelling reason to add that additional support. If you use this style, it will break as the report in issue #26.
 
 ```javascript
-var injector = require("./injector");
+const injector = require('./injector');
 
 injector().inject((TasksPrinter) => {
   TasksPrinter.print();
@@ -139,52 +139,49 @@ injector().inject((TasksPrinter) => {
 
 ## Writing tests
 
-Dependency injection really improves the ease of testing, removes reliance on global variables and allows you to intercept seams and make dependencies friendly.
+Dependency injection really improves the ease of testing, removes reliance on global constiables and allows you to intercept seams and make dependencies friendly.
 
-#### `test/unit/src/TasksPrinterSpec.coffee`
+#### `test/unit/TasksPrinterSpec.js`
 
-The tests examples are in coffee-script because the syntax of coffee script makes this code much lighter and easier to read and maintain.
+```javascript
+const injector = require('../../src/Injector');
 
-```coffeescript
-injector = require "../../lib/injector"
-
-describe "TasksPrinter", ->
-  beforeEach ->
-    @mockConsole = {
+describe('TasksPrinter', () => {
+  beforeEach(function () {
+    this.mockConsole = {
       logs:[],
-      log:()-> @logs.push(arguments)
-    }
+      log: () => this.logs.push(arguments)
+    };
 
-    #below we replace the console dependency silently
+    // below we replace the console dependency silently
     injector()
-      .addDependency("console", @mockConsole, true)
-      .inject (@TasksPrinter)=>
+      .addDependency('console', this.mockConsole, true)
+      .inject((TasksPrinter) => {
+        this.TasksPrinter = TasksPrinter;
+      });
+  });
 
-  it "should exist", ->
-    expect(@TasksPrinter).to.exist
+  it('should exist', function () {
+    expect(this.TasksPrinter).to.exist;
+  });
 
-  it "should greet correctly", ->
-    @TasksPrinter.print()
-    expect(@mockConsole.logs[0][0]).to.deep.equal [
-        "Task 1", "Task 2", "Task 3"
-    ]
+  it('should greet correctly', function () {
+    this.TasksPrinter.print();
+    expect(this.mockConsole.logs[0][0]).to.deep.equal([
+        'Task 1', 'Task 2', 'Task 3'
+    ]);
+  });
+});
 ```
-
-## More Examples
-
-In order to illustrate how to use Spur IoC, we created sample apps in both Coffee-Script and JavaScript. We will be building out a more elaborate application sample, so please check back soon.
-
- * [Coffee-Script: Express.js Web Server](https://github.com/opentable/spur-express-coffee-example)
- * [JavaScript: Express.js Web Server](https://github.com/opentable/spur-express-js-example)
 
 ## Error reporting
 
-One of the great things about ioc is that you get real application dependency errors upfront at startup
+One of the great things about ioc is that you get real application dependency errors upfront at the start of your application.
 
 #### Missing dependency with typo
 
 ```javascript
-module.exports = function(TaskZ, console){
+module.exports = function (TaskZ, console) {
   //...
 }
 
@@ -195,7 +192,7 @@ module.exports = function(TaskZ, console){
 #### Adding a cyclic dependency back to TasksPrinter in Tasks.js
 
 ```javascript
-module.exports = function(_, TasksPrinter){
+module.exports = function (_, TasksPrinter) {
   //...
 }
 
@@ -227,14 +224,6 @@ To run the test suite, first install the dependancies, then run `npm test`
 ```bash
 $ npm install
 $ npm test
-```
-
-> Requires Node 4+ for dev tools, but we recommend using Node 6.
-
-## Watch files and rebuild on change
-
-```bash
-$ npm run dev
 ```
 
 # License

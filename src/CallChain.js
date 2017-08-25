@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+const chalk = require('chalk');
 
 class CallChain {
   constructor(name, parent) {
@@ -44,4 +44,4 @@ class CallChain {
   }
 }
 
-export default CallChain;
+module.exports = CallChain;
