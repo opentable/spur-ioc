@@ -1,5 +1,5 @@
 const _bindAll = require('lodash.bindall');
-const _forEach = require('lodash.forEach');
+const _forEach = require('lodash.foreach');
 const chalk = require('chalk');
 
 class Level {
