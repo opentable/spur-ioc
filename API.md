@@ -1,4 +1,4 @@
-#Topics
+# Topics
 
 - [API](#api)
   - [Spur](#spur)
