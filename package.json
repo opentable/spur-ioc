@@ -1,7 +1,7 @@
 {
   "name": "spur-ioc",
   "description": "Dependency Injection library for Node.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./src/Injector",
   "scripts": {
     "lint": "eslint .",
