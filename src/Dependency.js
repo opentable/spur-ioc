@@ -1,4 +1,4 @@
-const Util = require('./Util');
+const FunctionArgumentsParser = require('./FunctionArgumentsParser');
 
 class Dependency {
   constructor(name) {
@@ -8,7 +8,7 @@ class Dependency {
   static resolvableDependency(name, dependency) {
     const dep = new Dependency(name);
     dep.fn = dependency;
-    dep.dependencies = Util.parseDependencies(dependency);
+    dep.dependencies = FunctionArgumentsParser.parse(dependency);
     return dep;
   }
 

@@ -7,7 +7,8 @@ const rfunction = /function\s+\w*\s*\((.*?)\)/;
 const rcomma = /\s*,\s*/;
 
 class Util {
-  parseDependencies(fn) {
+
+  parse(fn) {
     const params = fn.toString()
       .replace(rnewline, ' ')
       .replace(rat, '')
@@ -15,6 +16,7 @@ class Util {
 
     return _compact(_map(params, (p) => p.trim()));
   }
+
 }
 
 module.exports = new Util();
