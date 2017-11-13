@@ -1,22 +1,47 @@
 const _map = require('lodash.map');
 const _compact = require('lodash.compact');
 
-const rnewline = /\n/g;
-const rat = /_at_/g;
-const rfunction = /function\s+\w*\s*\((.*?)\)/;
-const rcomma = /\s*,\s*/;
+const NEWLINE = /\n/g;
+const AT = /_at_/g;
+const ARROW_ARG = /^([^(]+?)=>/;
+const FN_ARGS = /^[^(]*\(\s*([^)]*)\)/m;
+const FN_ARG_SPLIT = /,/;
+const FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
+const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 
-class Util {
+class FunctionArgumentsParser {
 
   parse(fn) {
-    const params = fn.toString()
-      .replace(rnewline, ' ')
-      .replace(rat, '')
-      .match(rfunction)[1].split(rcomma);
+    if (typeof fn !== 'function') {
+      throw new Error('A valid function was no provided as a function wrapper.');
+    }
 
-    return _compact(_map(params, (p) => p.trim()));
+    const args = [];
+    const argsDeclaration = this.extractArgs(fn);
+
+    argsDeclaration[1].split(FN_ARG_SPLIT).forEach(function (arg) {
+      arg.replace(FN_ARG, function(name) {
+        args.push(name);
+      });
+    });
+
+    return _compact(_map(args, (p) => p.trim()));
+  }
+
+  extractArgs(fn) {
+    const fnText = this.stringifyFn(fn)
+      .replace(STRIP_COMMENTS, '')
+      .replace(NEWLINE, ' ')
+      .replace(AT, '');
+
+    const args = fnText.match(ARROW_ARG) || fnText.match(FN_ARGS);
+    return args;
+  }
+
+  stringifyFn(fn) {
+    return Function.prototype.toString.call(fn);
   }
 
 }
 
-module.exports = new Util();
+module.exports = new FunctionArgumentsParser();
