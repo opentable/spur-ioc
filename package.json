@@ -48,6 +48,9 @@
     "type": "git",
     "url": "git://github.com/opentable/spur-ioc.git"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "chalk": "^2.3.0",
     "lodash.assign": "^4.2.0",
@@ -62,13 +65,10 @@
     "stack-filter": "^1.0.1"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
-    "eslint": "^4.5.0",
-    "eslint-plugin-node": "^5.1.1",
-    "mocha": "^3.5.0",
-    "sinon": "^3.2.1"
-  },
-  "engines": {
-    "node": ">=6.0.0"
+    "chai": "^4.1.2",
+    "eslint": "^4.11.0",
+    "eslint-plugin-node": "^5.2.1",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.2"
   }
 }
