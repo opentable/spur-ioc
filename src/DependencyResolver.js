@@ -146,7 +146,6 @@ class DependencyResolver {
         }
         dep.instance = dep.fn.apply(null, instances);
       } catch (error) {
-        this.cleanStack(error);
         this.errors.push(DependencyError.exception(callChain, error));
       }
 
@@ -155,10 +154,6 @@ class DependencyResolver {
 
     this.errors.push(DependencyError.missingDependency(callChain));
     return null;
-  }
-
-  cleanStack(e) {
-    return (e.stack = `\t${this.stackFilter.filter(e.stack).join('\n\t')}`); // eslint-disable-line no-param-reassign
   }
 
   printErrors() {
