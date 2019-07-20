@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 global.assert = require('assert');
 global.chai = require('chai');
 
