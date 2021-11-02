@@ -1,11 +1,11 @@
 {
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "plugins": ["node"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended"
+  ],
   "parserOptions": {
-    "ecmaVersion": 6
+    // Only ESLint 6.2.0 and later support ES2020.
+    "ecmaVersion": 2020
   },
   "rules": {
     "node/no-unsupported-features": [2, {
