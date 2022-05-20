@@ -2,10 +2,9 @@
 
 Dependency Injection library for [Node.js](http://nodejs.org/).
 
-[![npm version](https://badge.fury.io/js/spur-ioc.svg)](http://badge.fury.io/js/spur-ioc)
-[![Build Status](https://travis-ci.org/opentable/spur-ioc.svg?branch=master)](https://travis-ci.org/opentable/spur-ioc)
-[![Dependencies](https://david-dm.org/opentable/spur-ioc.svg)](https://david-dm.org/opentable/spur-ioc)
-[![devDependency Status](https://david-dm.org/opentable/spur-ioc/dev-status.svg)](https://david-dm.org/opentable/spur-ioc?type=dev)
+  [![NPM Version][npm-version-image]][npm-url]
+  [![NPM Install Size][npm-install-size-image]][npm-install-size-url]
+  [![NPM Downloads][npm-downloads-image]][npm-downloads-url]
 
 # About the Spur Framework
 
@@ -229,3 +228,11 @@ $ npm test
 # License
 
 [MIT](LICENSE)
+
+
+[npm-downloads-image]: https://badgen.net/npm/dm/spur-ioc
+[npm-downloads-url]: https://npmcharts.com/compare/spur-ioc?minimal=true
+[npm-install-size-image]: https://badgen.net/packagephobia/install/spur-ioc
+[npm-install-size-url]: https://packagephobia.com/result?p=spur-ioc
+[npm-url]: https://npmjs.org/package/spur-ioc
+[npm-version-image]: https://badgen.net/npm/v/spur-ioc
