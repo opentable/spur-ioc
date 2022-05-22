@@ -49,7 +49,7 @@
     "url": "git://github.com/opentable/spur-ioc.git"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
+    "chalk": "^4.1.2",
     "lodash.assign": "^4.2.0",
     "lodash.bindall": "^4.4.0",
     "lodash.compact": "^3.0.1",
@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-plugin-node": "^11.1.0",
     "mocha": "^10.0.0",
     "sinon": "^14.0.0"
