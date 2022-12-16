@@ -58,8 +58,7 @@
     "lodash.isobject": "^3.0.2",
     "lodash.keys": "^4.2.0",
     "lodash.map": "^4.6.0",
-    "require-all": "^3.0.0",
-    "stack-filter": "^1.0.1"
+    "require-all": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^4.3.7",

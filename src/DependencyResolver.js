@@ -1,6 +1,5 @@
 const _bindAll = require('lodash.bindall');
 const _keys = require('lodash.keys');
-const stackFilter = require('stack-filter');
 const CallChain = require('./CallChain');
 
 class DependencyError {
@@ -62,9 +61,6 @@ class DependencyResolver {
     this.errors = [];
     this.warnings = [];
     this.resolvingFinished = false;
-    this.stackFilter = stackFilter.configure({
-      filters: ['DependencyResolver.']
-    });
   }
 
   resolveArray(deps, callChain) {
