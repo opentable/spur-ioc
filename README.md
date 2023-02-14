@@ -33,7 +33,7 @@ The Spur Framework is a collection of commonly used Node.JS libraries used to cr
     * Ability to substitute dependencies in tests
   * Resolution of dependencies by querying via regular expression
   * Clear error stack trace reporting
-  * Supports active Node versions in the [LTS Schedule](https://github.com/nodejs/LTS#lts-schedule). ([view current versions](.travis.yml))
+  * Supports active Node versions in the [LTS Schedule](https://github.com/nodejs/LTS#lts-schedule). ([view current versions](.nvmrc))
 
 # What is inversion of control and why you should use it?
 
