@@ -4,7 +4,7 @@ const _forEach = require('lodash.foreach');
 const _isFunction = require('lodash.isfunction');
 const _isObject = require('lodash.isobject');
 
-const rfileFilter = /(.+)\.(js|json)$/;
+const fileFilterExpression = require('./FileFilterExpression');
 
 const hasOwnProp = function (source, propertyName) {
   return Object.prototype.hasOwnProperty.call(source, propertyName);
@@ -15,7 +15,7 @@ module.exports = {
     const dirname = path.resolve(rootDir, dir);
     const libs = requireAll({
       dirname,
-      filter: rfileFilter
+      filter: fileFilterExpression
     });
     this.registerLibMap(libs);
     return this;
