@@ -12,6 +12,9 @@ module.exports = {
   },
 
   addResolvableDependency(name, dependency, suppressWarning = false) {
+    if (this.shouldIgnoreDependency(name, dependency)) {
+      return this;
+    }
     if (!suppressWarning) {
       this.warnIfNeeded(name);
     }
@@ -20,6 +23,9 @@ module.exports = {
   },
 
   addDependency(name, dependency, suppressWarning = false) {
+    if (this.shouldIgnoreDependency(name, dependency)) {
+      return this;
+    }
     if (!suppressWarning) {
       this.warnIfNeeded(name);
     }
@@ -28,6 +34,9 @@ module.exports = {
   },
 
   addConstructedDependency(name, dependency, suppressWarning = false) {
+    if (this.shouldIgnoreDependency(name, dependency)) {
+      return this;
+    }
     if (!suppressWarning) {
       this.warnIfNeeded(name);
     }
@@ -46,6 +55,10 @@ module.exports = {
 
   hasDependency(name) {
     return !!this.dependencies[name];
+  },
+
+  shouldIgnoreDependency(dependency) {
+    return Boolean(dependency.spurIocIgnore);
   },
 
   merge(otherInjector, suppressWarning = false) {
