@@ -54,6 +54,7 @@
     "lodash.bindall": "^4.4.0",
     "lodash.compact": "^3.0.1",
     "lodash.foreach": "^4.5.0",
+    "lodash.get": "^4.4.2",
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
     "lodash.keys": "^4.2.0",
