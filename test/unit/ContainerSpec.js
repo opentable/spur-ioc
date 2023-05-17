@@ -60,4 +60,38 @@ describe('injector - Container Management', () => {
     }))
     .to.throw('Resolver encountered errors');
   });
+
+  describe('ignored dependencies', () => {
+    const initialDep = function () {
+      return 'initial';
+    };
+
+    const ignoredDep = function() {
+      throw new Error('this should not be called');
+      return 'ignored';
+    };
+    ignoredDep.spurIocIgnore = true;
+
+    const replacementDep = function () {
+      return 'updated';
+    };
+
+    it('ignores registered dependencies which have spurIocIgnore=true', function () {
+      this.injector.addDependency('a', initialDep);
+      this.injector.addDependency('a', ignoredDep);
+
+      const dep = this.injector.getDependency('a');
+      expect(dep.name).to.deep.equal('a');
+      expect(dep.instance).to.be.eq(initialDep);
+    });
+
+    it('overrides registered dependencies which have spurIocIgnore=false', function() {
+      this.injector.addDependency('a', initialDep);
+      this.injector.addDependency('a', replacementDep);
+
+      const dep = this.injector.getDependency('a');
+      expect(dep.name).to.equal('a');
+      expect(dep.instance).to.be.eq(replacementDep);
+    });
+  });
 });
