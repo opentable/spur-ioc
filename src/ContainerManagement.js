@@ -62,12 +62,12 @@ module.exports = {
 
   addConstructedDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
-      return this;
-    }
-    if (!suppressWarning) {
       if (!suppressWarning) {
         this.warnIgnoredDependency(name, dependency);
       }
+      return this;
+    }
+    if (!suppressWarning) {
       this.warnOverrideIfNeeded(name, dependency);
     }
     this.dependencies[name] = dependency;
