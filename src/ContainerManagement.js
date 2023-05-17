@@ -17,7 +17,7 @@ module.exports = {
       return _get(dependency, 'constructor.name') || '<object>';
     }
 
-    return '<primitive>';
+    return `<${typeof dependency}>`;
   },
 
   warnOverrideIfNeeded(name, dependency) {
