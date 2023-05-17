@@ -1,4 +1,5 @@
 const _forEach = require('lodash.foreach');
+const _get = require('lodash.get');
 const Dependency = require('./Dependency');
 
 const rall = /.+/;
@@ -7,7 +8,8 @@ module.exports = {
 
   warnIfNeeded(name) {
     if (this.hasDependency(name)) {
-      this.logger.warn(`warning: ${name} dependency is being overwritten in ${this.name} injector`);
+      const dependencyName = _get(dependency, 'name');
+      this.logger.warn(`warning: ${name} (from: ${dependencyName}) dependency is being overwritten in ${this.name} injector`);
     }
   },
 
