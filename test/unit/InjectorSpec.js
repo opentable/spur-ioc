@@ -107,38 +107,77 @@ describe('Injector', () => {
     this.injector.inject(function (_, chai, $injector, foo) {});
   });
 
-  it('does not inject included dependencies that are marked to be ignore', function () {
+  describe('ignored dependencies', () => {
     const initialDep = function () {
       return 'initial';
     };
+
     const ignoredDep = function() {
       throw new Error('this should not be called');
       return 'ignored';
     };
     ignoredDep.spurIocIgnore = true;
 
-    this.injector.registerDependencies({ a: 'a', b: initialDep, });
-    this.injector.registerDependencies({ b: ignoredDep });
-
-    this.injector.inject(function (a, b) {
-      expect([a, b]).to.deep.equal(['a', initialDep]);
-      expect(b()).to.be.eq('initial');
-    });
-  });
-
-  it('overrides dependencies explicitly marked not to be ignored', function() {
-    const initialDep = function () {
-      return 'initial';
-    };
     const replacementDep = function () {
       return 'updated';
     };
 
-    this.injector.registerDependencies({ a: 'a', b: initialDep, });
-    this.injector.registerDependencies({ b: replacementDep });
-    this.injector.inject(function (a, b) {
-      expect([a, b]).to.deep.equal(['a', replacementDep]);
-      expect(b()).to.be.eq('updated');
+    describe('spurIocIgnore=true', () => {
+      it('ignores registered dependencies which have spurIocIgnore=true', function () {
+        this.injector.registerDependencies({ a: initialDep, });
+        this.injector.registerDependencies({ a: ignoredDep });
+
+        this.injector.inject(function (a) {
+          expect(a).to.deep.equal(initialDep);
+          expect(a()).to.be.eq('initial');
+        });
+      });
+
+      it('ignores registered folder dependencies which have spurIocIgnore=true', function() {
+        this.injector.registerFolders(__dirname, ['../fixtures']);
+
+        this.injector.inject(function (Wall) {
+          expect(Wall).to.equal('Wall override');
+        });
+      });
+
+      it('ignores resolvable dependencies which have spurIocIgnore=true', function() {
+        this.injector.addResolvableDependency('b', initialDep);
+        this.injector.addResolvableDependency('b', ignoredDep);
+
+        this.injector.inject(function ($injector) {
+          expect($injector.get('b')).to.equal('initial');
+        });
+      });
+    });
+
+    describe('explicitly marked not to be ignored', () => {
+      it('overrides registered dependencies which have spurIocIgnore=false', function() {
+        this.injector.registerDependencies({ a: initialDep, });
+        this.injector.registerDependencies({ a: replacementDep });
+
+        this.injector.inject(function (a) {
+          expect(a).to.equal(replacementDep);
+          expect(a()).to.be.eq('updated');
+        });
+      });
+
+      it('overrides registered folder dependencies which have spurIocIgnore=false', function() {
+        this.injector.registerFolders(__dirname, ['../fixtures']);
+
+        this.injector.inject(function (Wall) {
+          expect(Wall).to.equal('Wall override');
+        });
+      });
+
+      it('overrides resolvable dependencies which have spurIocIgnore=false', function() {
+        this.injector.addResolvableDependency('b', initialDep);
+        this.injector.addResolvableDependency('b', replacementDep);
+
+        this.injector.inject(function ($injector) {
+          expect($injector.get('b')).to.equal('updated');
+        });
+      });
     });
   });
 
