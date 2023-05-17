@@ -107,6 +107,41 @@ describe('Injector', () => {
     this.injector.inject(function (_, chai, $injector, foo) {});
   });
 
+  it('does not inject included dependencies that are marked to be ignore', function () {
+    const initialDep = function () {
+      return 'initial';
+    };
+    const ignoredDep = function() {
+      throw new Error('this should not be called');
+      return 'ignored';
+    };
+    ignoredDep.spurIocIgnore = true;
+
+    this.injector.registerDependencies({ a: 'a', b: initialDep, });
+    this.injector.registerDependencies({ b: ignoredDep });
+
+    this.injector.inject(function (a, b) {
+      expect([a, b]).to.deep.equal(['a', initialDep]);
+      expect(b()).to.be.eq('initial');
+    });
+  });
+
+  it('overrides dependencies explicitly marked not to be ignored', function() {
+    const initialDep = function () {
+      return 'initial';
+    };
+    const replacementDep = function () {
+      return 'updated';
+    };
+
+    this.injector.registerDependencies({ a: 'a', b: initialDep, });
+    this.injector.registerDependencies({ b: replacementDep });
+    this.injector.inject(function (a, b) {
+      expect([a, b]).to.deep.equal(['a', replacementDep]);
+      expect(b()).to.be.eq('updated');
+    });
+  });
+
   describe('expose and link', () => {
     beforeEach(function () {
       this.injector.registerDependencies({

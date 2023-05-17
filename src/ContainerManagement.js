@@ -1,46 +1,60 @@
 const _forEach = require('lodash.foreach');
 const _get = require('lodash.get');
+const _isFunction = require('lodash.isfunction');
+const _isObject = require('lodash.isobject');
 const Dependency = require('./Dependency');
 
 const rall = /.+/;
 
 module.exports = {
 
-  warnIfNeeded(name) {
+  getDependencySourceHint(dependency) {
+    if (_isFunction(dependency)) {
+      return _get(dependency, 'name') || '<anonymous function>';
+    }
+
+    if (_isObject(dependency)) {
+      return _get(dependency, 'constructor.name') || '<object>';
+    }
+
+    return '<primitive>';
+  },
+
+  warnIfNeeded(name, dependency) {
     if (this.hasDependency(name)) {
-      const dependencyName = _get(dependency, 'name');
-      this.logger.warn(`warning: ${name} (from: ${dependencyName}) dependency is being overwritten in ${this.name} injector`);
+      const hint = this.getDependencySourceHint(dependency);
+      this.logger.warn(`warning: ${name} (${hint}) dependency is being overwritten in ${this.name} injector`);
     }
   },
 
   addResolvableDependency(name, dependency, suppressWarning = false) {
-    if (this.shouldIgnoreDependency(name, dependency)) {
+    if (this.shouldIgnoreDependency(dependency)) {
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name);
+      this.warnIfNeeded(name, dependency);
     }
     this.dependencies[name] = Dependency.resolvableDependency(name, dependency);
     return this;
   },
 
   addDependency(name, dependency, suppressWarning = false) {
-    if (this.shouldIgnoreDependency(name, dependency)) {
+    if (this.shouldIgnoreDependency(dependency)) {
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name);
+      this.warnIfNeeded(name, dependency);
     }
     this.dependencies[name] = Dependency.dependency(name, dependency);
     return this;
   },
 
   addConstructedDependency(name, dependency, suppressWarning = false) {
-    if (this.shouldIgnoreDependency(name, dependency)) {
+    if (this.shouldIgnoreDependency(dependency)) {
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name);
+      this.warnIfNeeded(name, dependency);
     }
     this.dependencies[name] = dependency;
     return this;
@@ -60,7 +74,7 @@ module.exports = {
   },
 
   shouldIgnoreDependency(dependency) {
-    return Boolean(dependency.spurIocIgnore);
+    return Boolean(_get(dependency, 'spurIocIgnore', false));
   },
 
   merge(otherInjector, suppressWarning = false) {
