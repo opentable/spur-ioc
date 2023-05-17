@@ -20,19 +20,27 @@ module.exports = {
     return '<primitive>';
   },
 
-  warnIfNeeded(name, dependency) {
+  warnOverrideIfNeeded(name, dependency) {
     if (this.hasDependency(name)) {
       const hint = this.getDependencySourceHint(dependency);
       this.logger.warn(`warning: ${name} (${hint}) dependency is being overwritten in ${this.name} injector`);
     }
   },
 
+  warnIgnoredDependency(name, dependency) {
+    const hint = this.getDependencySourceHint(dependency);
+    this.logger.warn(`warning: ignoring ${name} (${hint}) dependency in ${this.name} injector`);
+  },
+
   addResolvableDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
+      if (!suppressWarning) {
+        this.warnIgnoredDependency(name, dependency);
+      }
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name, dependency);
+      this.warnOverrideIfNeeded(name, dependency);
     }
     this.dependencies[name] = Dependency.resolvableDependency(name, dependency);
     return this;
@@ -40,10 +48,13 @@ module.exports = {
 
   addDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
+      if (!suppressWarning) {
+        this.warnIgnoredDependency(name, dependency);
+      }
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name, dependency);
+      this.warnOverrideIfNeeded(name, dependency);
     }
     this.dependencies[name] = Dependency.dependency(name, dependency);
     return this;
@@ -54,7 +65,10 @@ module.exports = {
       return this;
     }
     if (!suppressWarning) {
-      this.warnIfNeeded(name, dependency);
+      if (!suppressWarning) {
+        this.warnIgnoredDependency(name, dependency);
+      }
+      this.warnOverrideIfNeeded(name, dependency);
     }
     this.dependencies[name] = dependency;
     return this;
