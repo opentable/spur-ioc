@@ -7,6 +7,6 @@ TypeScript is not officially supported, but will be available through a
 beta/release candidate version.
 */
 
-const expression = /(.+)\.(js|ts|json)$/;
+const expression = /^(?!.*\.d\.ts$)([^\.].*)\.(js|json|ts)?$$/;
 
 module.exports = expression;
