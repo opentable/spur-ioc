@@ -27,16 +27,8 @@ module.exports = {
     }
   },
 
-  warnIgnoredDependency(name, dependency) {
-    const hint = this.getDependencySourceHint(dependency);
-    this.logger.warn(`warning: ignoring ${name} (${hint}) dependency in ${this.name} injector`);
-  },
-
   addResolvableDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
-      if (!suppressWarning) {
-        this.warnIgnoredDependency(name, dependency);
-      }
       return this;
     }
     if (!suppressWarning) {
@@ -48,9 +40,6 @@ module.exports = {
 
   addDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
-      if (!suppressWarning) {
-        this.warnIgnoredDependency(name, dependency);
-      }
       return this;
     }
     if (!suppressWarning) {
@@ -62,9 +51,6 @@ module.exports = {
 
   addConstructedDependency(name, dependency, suppressWarning = false) {
     if (this.shouldIgnoreDependency(dependency)) {
-      if (!suppressWarning) {
-        this.warnIgnoredDependency(name, dependency);
-      }
       return this;
     }
     if (!suppressWarning) {
