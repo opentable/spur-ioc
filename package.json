@@ -1,7 +1,7 @@
 {
   "name": "spur-ioc",
   "description": "Dependency Injection library for Node.js",
-  "version": "1.2.1",
+  "version": "2.0.0-rc.2",
   "main": "./src/Injector",
   "scripts": {
     "lint": "eslint .",
@@ -54,6 +54,7 @@
     "lodash.bindall": "^4.4.0",
     "lodash.compact": "^3.0.1",
     "lodash.foreach": "^4.5.0",
+    "lodash.get": "^4.4.2",
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
     "lodash.keys": "^4.2.0",
