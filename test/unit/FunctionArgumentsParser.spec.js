@@ -1,28 +1,28 @@
 const FunctionArgumentsParser = require('../../src/FunctionArgumentsParser');
 
-describe('FunctionArgumentsParser', () => {
+describe('FunctionArgumentsParser', function () {
 
   const expectFunctionArgs = (fn, expected) => {
     const result = FunctionArgumentsParser.parse(fn);
-    expect(result).to.deep.equal(expected);
+    expect(result).toEqual(expected);
   };
 
   describe('Function args', () => {
 
     it('in a single line', () => {
-      const fn = function (dep1, dep2, dep3) { return dep1; };
+      const fn = (dep1, dep2, dep3) => { return dep1; };
       expectFunctionArgs(fn, ['dep1', 'dep2', 'dep3']);
     });
 
     it('with no arguments', () => {
-      const fn = function () {
+      const fn = () => {
       };
 
       expectFunctionArgs(fn, []);
     });
 
     it('with only one argument', () => {
-      const fn = function (dep1) {
+      const fn = (dep1) => {
         return dep1;
       };
 
@@ -30,7 +30,7 @@ describe('FunctionArgumentsParser', () => {
     });
 
     it('with space after function', () => {
-      const fn = function (dep1, dep2, dep3) {
+      const fn = (dep1, dep2, dep3) => {
         return dep1;
       };
 
@@ -38,7 +38,7 @@ describe('FunctionArgumentsParser', () => {
     });
 
     it('with tab/multiple spaces after function', () => {
-      const fn = function   (dep1, dep2, dep3) {
+      const fn = (dep1, dep2, dep3) => {
         return dep1;
       };
 
@@ -46,7 +46,7 @@ describe('FunctionArgumentsParser', () => {
     });
 
     it('with space after function', () => {
-      const fn = function (dep1, dep2, dep3) {
+      const fn = (dep1, dep2, dep3) => {
         return dep1;
       };
 
@@ -54,9 +54,9 @@ describe('FunctionArgumentsParser', () => {
     });
 
     it('with new lines between arguements', () => {
-      const fn = function (dep1,
+      const fn = (dep1,
         dep2,
-        dep3) {
+        dep3) => {
         return dep1;
       };
 
@@ -64,7 +64,7 @@ describe('FunctionArgumentsParser', () => {
     });
 
     it('with no space between arguements', () => {
-      const fn = function(dep1,dep2,dep3) {
+      const fn = (dep1,dep2,dep3) => {
         return dep1;
       };
 
@@ -134,7 +134,5 @@ describe('FunctionArgumentsParser', () => {
 
       expectFunctionArgs(fn, ['dep1', 'dep2', 'dep3']);
     });
-
   });
-
 });
