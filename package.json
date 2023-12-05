@@ -49,23 +49,23 @@
     "url": "git://github.com/opentable/spur-ioc.git"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
-    "lodash.assign": "^4.2.0",
-    "lodash.bindall": "^4.4.0",
-    "lodash.compact": "^3.0.1",
-    "lodash.foreach": "^4.5.0",
-    "lodash.get": "^4.4.2",
-    "lodash.isfunction": "^3.0.9",
-    "lodash.isobject": "^3.0.2",
-    "lodash.keys": "^4.2.0",
-    "lodash.map": "^4.6.0",
-    "require-all": "^3.0.0"
+    "chalk": "4.1.2",
+    "lodash.assign": "4.2.0",
+    "lodash.bindall": "4.4.0",
+    "lodash.compact": "3.0.1",
+    "lodash.foreach": "4.5.0",
+    "lodash.get": "4.4.2",
+    "lodash.isfunction": "3.0.9",
+    "lodash.isobject": "3.0.2",
+    "lodash.keys": "4.2.0",
+    "lodash.map": "4.6.0",
+    "require-all": "3.0.0"
   },
   "devDependencies": {
-    "chai": "^4.3.7",
-    "eslint": "^8.42.0",
-    "eslint-plugin-node": "^11.1.0",
-    "mocha": "^10.2.0",
-    "sinon": "^15.1.2"
+    "chai": "4.3.10",
+    "eslint": "8.55.0",
+    "eslint-plugin-node": "11.1.0",
+    "mocha": "10.2.0",
+    "sinon": "17.0.1"
   }
 }
