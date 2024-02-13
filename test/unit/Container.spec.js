@@ -10,12 +10,12 @@ describe('injector - Container Management', function () {
     const dep = this.injector.getDependency('foo');
     expect(dep.dependencies).toEqual(['bar']);
     expect(dep.name).toBe('foo');
-    this.injector.addResolvableDependency('foo', (bar) => { console.log(bar); });
+    this.injector.addResolvableDependency('foo', (bar) => { console.debug(bar); });
   });
 
   it('inject', () => {
 
-    this.injector.addResolvableDependency('foo', (bar, punct, _) => {
+    this.injector.addResolvableDependency('foo', (bar, punct) => {
       return `${bar} world${punct}`;
     });
 
@@ -51,7 +51,7 @@ describe('injector - Container Management', function () {
     this.injector.addDependency('punct', '!');
 
     expect(() => this.injector.inject((foo) => {
-      console.log(foo);
+      console.debug(foo);
     }))
     .toThrow('Resolver encountered errors');
   });

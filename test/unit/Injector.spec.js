@@ -72,11 +72,10 @@ describe('Injector', function () {
     DependencyResolver.prototype.throwError = () => {};
 
     this.injector1.inject(($injector) => {
-      expect($injector.get('missing')).to.equal(null);
+      expect($injector.get('missing')).toBeNull();
     });
 
     const error = this.injector1.resolver.errors[0];
-    console.log(error);
 
     expect(error.error).toBe('Missing Dependency');
     expect(error.callChain.getPath()).toBe('$$injector1 -> $injector -> missing');
@@ -92,19 +91,19 @@ describe('Injector', function () {
 
   it('dont allow async use of $injector', (done) => {
     this.injector.registerDependencies({
-      _: 'lodash',
-      chai: 'chai'
+      mockDep1: 'mockDep1raw',
+      mockDep2: 'mockDep2raw'
     });
 
     this.injector.addResolvableDependency('foo', ($injector) => {
       setTimeout(() => {
-        expect(() => $injector.get('chai')).toThrow('cannot use $injector.get(\'chai\') asynchronously');
+        expect(() => $injector.get('mockDep1raw')).toThrow('cannot use $injector.get(\'mockDep1raw\') asynchronously');
         expect(() => $injector.getRegex(/.+/)).toThrow('cannot use $injector.getRegex(/.+/) asynchronously');
         done();
       }, 0);
     });
 
-    this.injector.inject((_, chai, $injector, foo) => {});
+    this.injector.inject((mockDep1, mockDep2, $injector, foo) => {});
   });
 
   describe('ignored dependencies', () => {
@@ -157,8 +156,8 @@ describe('Injector', function () {
         this.injector.registerDependencies({ a: replacementDep });
 
         this.injector.inject((a) => {
-          expect(a).to.equal(replacementDep);
-          expect(a()).to.be.eq('updated');
+          expect(a).toEqual(replacementDep);
+          expect(a()).toBe('updated');
         });
       });
 
