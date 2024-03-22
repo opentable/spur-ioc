@@ -1,3 +1,34 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prConcurrentLimit": 5,
+  "extends": [
+    "config:js-app",
+    "group:monorepos",
+    "group:recommended",
+    "packages:eslint",
+    "packages:unitTest",
+    "packages:tslint"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": ["spur-"],
+      "groupName": "Spur packages",
+      "description": "All packages related to spur node framework"
+    },
+    {
+      "packagePatterns": ["prettier", "-prettier"],
+      "groupName": "Prettier packages",
+      "description": "All packages related to the prettier plugin"
+    },
+    {
+      "packagePatterns": ["eslint", "eslint-"],
+      "groupName": "ESLint packages",
+      "description": "All packages related to the eslint plugin"
+    },
+    {
+      "packagePatterns": ["jest", "@types/jest", "nock", "jest-"],
+      "groupName": "Testing packages",
+      "description": "All packages related to the test suite"
+    }
+  ]
 }
