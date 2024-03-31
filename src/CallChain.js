@@ -1,5 +1,3 @@
-const chalk = require('chalk');
-
 class CallChain {
   constructor(name, parent) {
     this.name = name;
@@ -27,7 +25,7 @@ class CallChain {
   }
 
   getHighlightedName() {
-    return chalk.yellow(this.name);
+    return this.name;
   }
 
   getPath(highlight) {
