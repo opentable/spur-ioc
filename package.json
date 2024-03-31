@@ -50,7 +50,6 @@
     "url": "git://github.com/opentable/spur-ioc.git"
   },
   "dependencies": {
-    "chalk": "4.1.2",
     "lodash.assign": "4.2.0",
     "lodash.bindall": "4.4.0",
     "lodash.compact": "3.0.1",
