@@ -1,14 +1,8 @@
-const requireAll = require('require-all');
 const path = require('path');
-const _forEach = require('lodash.foreach');
-const _isFunction = require('lodash.isfunction');
-const _isObject = require('lodash.isobject');
+const requireAll = require('require-all');
 
+const Utils = require('./Utils');
 const fileFilterExpression = require('./FileFilterExpression');
-
-const hasOwnProp = function (source, propertyName) {
-  return Object.prototype.hasOwnProperty.call(source, propertyName);
-};
 
 module.exports = {
   registerFolder(rootDir, dir) {
@@ -21,13 +15,14 @@ module.exports = {
     return this;
   },
 
-  registerLibMap(libs) {
-    _forEach(libs, (value, name) => {
-      if (hasOwnProp(libs, name)) {
+  registerLibMap(libs = {}) {
+    const names = Object.keys(libs) || [];
+    names.forEach((name) => {
+      if (Utils.hasOwnProp(libs, name)) {
         const lib = libs[name];
-        if (_isFunction(lib)) {
+        if (Utils.isFunction(lib)) {
           this.addResolvableDependency(name, lib);
-        } else if (_isObject(lib)) {
+        } else if (Utils.isObject(lib)) {
           this.registerLibMap(lib);
         }
       }
@@ -35,14 +30,15 @@ module.exports = {
     return this;
   },
 
-  registerFolders(rootDir, dirs) {
-    _forEach(dirs, (dir) => this.registerFolder(rootDir, dir));
+  registerFolders(rootDir, dirs = []) {
+    dirs.forEach((dir) => this.registerFolder(rootDir, dir));
     return this;
   },
 
-  registerDependencies(dependencies) {
-    _forEach(dependencies, (value, name) => {
-      if (hasOwnProp(dependencies, name)) {
+  registerDependencies(dependencies = {}) {
+    const names = Object.keys(dependencies) || [];
+    names.forEach((name) => {
+      if (Utils.hasOwnProp(dependencies, name)) {
         const lib = dependencies[name];
         this.addDependency(name, lib);
       }

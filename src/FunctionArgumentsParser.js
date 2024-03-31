@@ -1,6 +1,3 @@
-const _map = require('lodash.map');
-const _compact = require('lodash.compact');
-
 const NEWLINE = /\n/g;
 const AT = /_at_/g;
 const ARROW_ARG = /^([^(]+?)=>/;
@@ -21,11 +18,14 @@ class FunctionArgumentsParser {
 
     argsDeclaration[1].split(FN_ARG_SPLIT).forEach(function (arg) {
       arg.replace(FN_ARG, function(name) {
-        args.push(name);
+        const cleanName = (name || '').trim();
+        if (cleanName.length > 0) {
+          args.push(cleanName);
+        }
       });
     });
 
-    return _compact(_map(args, (p) => p.trim()));
+    return args;
   }
 
   extractArgs(fn) {

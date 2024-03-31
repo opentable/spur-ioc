@@ -1,20 +1,19 @@
-const _forEach = require('lodash.foreach');
-const _get = require('lodash.get');
-const _isFunction = require('lodash.isfunction');
-const _isObject = require('lodash.isobject');
 const Dependency = require('./Dependency');
+const Utils = require('./Utils');
 
 const rall = /.+/;
 
 module.exports = {
 
   getDependencySourceHint(dependency) {
-    if (_isFunction(dependency)) {
-      return _get(dependency, 'name') || '<anonymous function>';
+    if (Utils.isFunction(dependency)) {
+      return dependency.name || '<anonymous function>';
     }
 
-    if (_isObject(dependency)) {
-      return _get(dependency, 'constructor.name') || '<object>';
+    if (Utils.isObject(dependency)) {
+      return (dependency.constructor && dependency.constructor.name)
+        ? dependency.constructor.name
+        : '<object>';
     }
 
     return `<${typeof dependency}>`;
@@ -74,13 +73,18 @@ module.exports = {
   },
 
   shouldIgnoreDependency(dependency) {
-    return Boolean(_get(dependency, 'spurIocIgnore', false));
+    const spurIocIgnore = (dependency && dependency.spurIocIgnore)
+      ? dependency.spurIocIgnore
+      : false;
+
+    return Boolean(spurIocIgnore);
   },
 
   merge(otherInjector, suppressWarning = false) {
-    const dependencies = otherInjector.dependencies;
+    const dependencies = otherInjector.dependencies || {};
+    const names = Object.keys(dependencies) || [];
 
-    _forEach(dependencies, (value, name) => {
+    names.forEach((name) => {
       const dependency = dependencies[name];
       this.addConstructedDependency(name, dependency, suppressWarning);
     });
