@@ -63,7 +63,6 @@ describe('injector - Container Management', function () {
 
     const ignoredDep = () => {
       throw new Error('this should not be called');
-      return 'ignored';
     };
     ignoredDep.spurIocIgnore = true;
 
