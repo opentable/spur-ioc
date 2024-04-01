@@ -1,5 +1,4 @@
 const _bindAll = require('lodash.bindall');
-const _forEach = require('lodash.foreach');
 
 class Level {
   constructor(level, name, ascii, exit = false) {
@@ -38,7 +37,8 @@ class Logger {
   }
 
   addLoggingMethods() {
-    _forEach(LEVELS, (value, name) => {
+    const names = Object.keys(LEVELS) || [];
+    names.forEach((name) => {
       if (Object.prototype.hasOwnProperty.call(LEVELS, name)) {
         this[name] = LEVELS[name].log;
       }

@@ -1,5 +1,4 @@
 const _bindAll = require('lodash.bindall');
-const _keys = require('lodash.keys');
 const CallChain = require('./CallChain');
 
 class DependencyError {
@@ -82,7 +81,7 @@ class DependencyResolver {
   }
 
   resolveRegex(regex) {
-    const deps = _keys(this.container.dependencies)
+    const deps = (Object.keys(this.container.dependencies) || [])
       .filter((key) => { // eslint-disable-line
         return regex.test(key) && key !== '$injector' && key !== this.container.privateInjectorName();
       });
